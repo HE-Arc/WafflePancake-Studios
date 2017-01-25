@@ -16,6 +16,7 @@ an online photo gallery, accessible and updatable by multiple people at once.
 You're now ready to develop features for this projet!
 
 ## Run dev server
+Download the depedencies by running `pip install -r requirements.txt`, and update the depedencies by running command `pip freeze > requirements.txt`.
 Run the `ShiyWaffle/manage.py` with the following command : `python manage.py runserver`.
 
 # Delpoyement with NginX
