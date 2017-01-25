@@ -12,12 +12,17 @@ an online photo gallery, accessible and updatable by multiple people at once.
 2. You can then activate this virtual environment using `activate myenv`
    command.
 3. Run `pip install -r requirements.txt` to install depedencies in your virtual
-   environment, and update the depedencies by running command
-   `pip freeze > requirements.txt` when adding one.
+   environment.
 4. Copy the _ShinyWaffle/.env.example_ into a _.env_ file and modify
    the variables accordingly to your database configuration.
 
 You're now ready to develop features for this projet!
+
+## Dependencies
+
+If you had to install a new python package to implement a new feature, update
+the depedencies by running command `pip freeze > requirements.txt` to update
+the requirements file.
 
 ## Run dev server
 
