@@ -19,7 +19,7 @@ You're now ready to develop features for this projet!
 Run the `ShiyWaffle/manage.py` with the following command : `python manage.py runserver`.
 
 # Delpoyement with NginX
-For further deployment on production server, see (this link)[http://uwsgi-docs.readthedocs.io/en/latest/tutorials/Django_and_nginx.html].
+For further deployment on production server, see [this link](http://uwsgi-docs.readthedocs.io/en/latest/tutorials/Django_and_nginx.html).
 
 # Project's must-have
 The project will implement the following features :
