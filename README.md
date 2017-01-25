@@ -11,12 +11,11 @@ an online photo gallery, accessible and updatable by multiple people at once.
    environment with command `conda create --name myenv python=3.6.0 django`.
 2. You can then activate this virtual environment using `activate myenv`
    command.
-3. Then run `pip install django` to install Django in your virtual environment.
+3. Run `pip install -r requirements.txt` to install depedencies in your virtual environment, and update the depedencies by running command `pip freeze > requirements.txt` when adding one.
 
 You're now ready to develop features for this projet!
 
 ## Run dev server
-Download the depedencies by running `pip install -r requirements.txt`, and update the depedencies by running command `pip freeze > requirements.txt`.
 Run the `ShiyWaffle/manage.py` with the following command : `python manage.py runserver`.
 
 # Delpoyement with NginX
