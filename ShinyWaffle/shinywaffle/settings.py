@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'shinywaffle.apps.ShinyWaffleConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'ShinyWaffle.urls'
+ROOT_URLCONF = 'shinywaffle.urls'
 
 TEMPLATES = [
     {
@@ -70,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'ShinyWaffle.wsgi.application'
+WSGI_APPLICATION = 'shinywaffle.wsgi.application'
 
 
 # Database
