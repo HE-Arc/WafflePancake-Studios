@@ -26,7 +26,7 @@ the requirements file.
 
 ## Run dev server
 
-Run the `ShiyWaffle/manage.py` with the following command : `python manage.py runserver`.
+Run the `ShinyWaffle/manage.py` with the following command : `python manage.py runserver`.
 
 # Delpoyement with NginX
 
@@ -48,4 +48,4 @@ The project might implement following features :
 * Modify photos on the fly (crop, resize, draw on it, filters, advanced edge detection, face recognition, whatever...).
 * Infinite left - right - up - down scrolling on a board, sharing photos as on an infinite table.
 * Add funny widgets to the infinite-scrollable-area.
-* Entire universe accurate physical (on all scales) simulation, to find the anser to the universe, the life, and everything.
+* Entire universe accurate physical (on all scales) simulation, to find the answer to the universe, the life, and everything.
