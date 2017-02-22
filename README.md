@@ -37,7 +37,7 @@ want to run the server from an other terminal.__
 
 Run the `python manage.py runserver` to run the server.
 
-# Delpoyement with NginX
+# Deployment with NginX
 
 For further deployment on production server, see [this link](http://uwsgi-docs.readthedocs.io/en/latest/tutorials/Django_and_nginx.html).
 
