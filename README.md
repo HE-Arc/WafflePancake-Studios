@@ -26,7 +26,16 @@ the requirements file.
 
 ## Run dev server
 
-Run the `ShinyWaffle/manage.py` with the following command : `python manage.py runserver`.
+Before running the server, copy and paste the _env.example_ file to a _.env_
+file. Then, run the following command to tell Django to load the _.env_ file.
+
+For windows: `set DJANGO_READ_DOT_ENV_FILE=1`.
+For Linux: `export DJANGO_READ_DOT_ENV_FILE=1`.
+
+__This variable is set for the active console. You will have to reset it if you
+want to run the server from an other terminal.__
+
+Run the `python manage.py runserver` to run the server.
 
 # Delpoyement with NginX
 
