@@ -1,2 +1,18 @@
 {% extends "base.html" %}
-{% block content %}<p>coucou</p>{% endblock %}
+{% block content %}
+    <div class="jumbotron">
+        <div class="row">
+            <h1>Welcome on Waffle Pancake!</h1>
+            <div class="col-md-6">
+                <img class="about-banner" alt="rainbow cat" src="http://srvz-webapp.he-arc.ch/rainbow.jpg" />
+            </div>
+            <div class="col-md-6">
+                <p>
+                    <strong>Waffle Pancake</strong> is an application developped to help
+                    you to manage your pictures.
+                    Don't hesitate to <a href="{% url 'account_signup' %}">sign up</a> and create your first gallery!
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
