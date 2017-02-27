@@ -24,11 +24,37 @@ If you had to install a new python package to implement a new feature, update
 the depedencies by running command `pip freeze > requirements.txt` to update
 the requirements file.
 
+## Environment setup
+
+Before running the server, copy and paste the _env.example_ file to a _.env_
+file. Then, run the following command to tell Django to load the _.env_ file.
+
+Add the following line to the _.env_ file and adapt it with your database settings:
+
+```
+DATABASE_URL="postgres://<pg_user_name>:<pg_user_password>@127.0.0.1:<pg_port>/<pg_database_name>"
+```
+
+For windows: `set DJANGO_READ_DOT_ENV_FILE=1`.
+For Linux: `export DJANGO_READ_DOT_ENV_FILE=1`.
+
+__This variable is set for the active console. You will have to reset it if you
+want to run the server from an other terminal.__
+
+If you want to avoid launhing this command every time you open a new terminal,
+you can put the preceding command into the _postactivate_ of your virtual
+environement's bin directory (*$VIRTUAL_ENV/bin/postactivate*).
+It might be _postactivate.bat_ if you're using Windows.
+
+If you are using anaconda and wish to set this variable at environment
+activation automatically, have a look at this link:
+[https://conda.io/docs/using/envs.html#saved-environment-variables](https://conda.io/docs/using/envs.html#saved-environment-variables)
+
 ## Run dev server
 
-Run the `ShinyWaffle/manage.py` with the following command : `python manage.py runserver`.
+Run the `python manage.py runserver` to run the server.
 
-# Delpoyement with NginX
+# Deployment with NginX
 
 For further deployment on production server, see [this link](http://uwsgi-docs.readthedocs.io/en/latest/tutorials/Django_and_nginx.html).
 
