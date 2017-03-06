@@ -2,8 +2,11 @@
   "name": "shinywaffle",
   "version": "0.1.0",
   "dependencies": {},
+  "scripts": {
+    "watch": "gulp watch"
+  },
   "devDependencies": {
-    
+
     "browser-sync": "^2.14.0",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
@@ -17,7 +20,7 @@
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
     "run-sequence": "^1.2.2"
-    
+
   },
   "engines": {
     "node": ">=0.8.0"
