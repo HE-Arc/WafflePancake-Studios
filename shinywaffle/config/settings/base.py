@@ -106,7 +106,15 @@ MANAGERS = ADMINS
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres://localhost/shinywaffle'),
+    # 'default': env.db('DATABASE_URL', default='postgres://localhost/shinywaffle'),
+	'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': env('POSTGRES_NAME'),                      # Or path to database file if using sqlite3.
+        'USER': env('POSTGRES_USER'),                      # Not used with sqlite3.
+        'PASSWORD': env('POSTGRES_PASSWORD'),                  # Not used with sqlite3.
+        'HOST': env('POSTGRES_HOST'),                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': env('POSTGRES_PORT'),                      # Set to empty string for default. Not used with sqlite3.
+    }
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
