@@ -9,7 +9,8 @@
   color: #b94a48; }
 
 .navbar {
-  border-radius: 0px; }
+  border-radius: 0px;
+  background-color: #454545; }
 
 @media (max-width: 47.9em) {
   .navbar-nav .nav-item {
@@ -26,6 +27,4 @@
 
 /* Custom tweaks */
 .about-banner {
-  height: 300px;
-  float: left;
-  margin-right: 15px; }
+  height: 300px; }

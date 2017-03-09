@@ -19,4 +19,4 @@ class Gallery(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('gallery:detail', kwargs={'username': self.title})
+        return reverse('gallery:detail', kwargs={'title': self.title})
