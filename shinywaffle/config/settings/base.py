@@ -51,6 +51,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     # custom users app
     'shinywaffle.users.apps.UsersConfig',
+    'shinywaffle.galleries.apps.GalleriesConfig',
     # Your stuff: custom apps go here
 ]
 

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% block title %}Galleries{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Galleries</h2>
+
+  <div class="list-group">
+    {% for gallery in gallery_list %}
+      <div class="list-group-item">
+          {#<a href="#" class="list-group-item"> #}
+          <h4 class="list-group-item-heading"><a href="{% url 'galleries:detail' pk=gallery.id %}">{{ gallery.title }}</a></h4>
+          <img alt="{{ gallery.image_set.all.first.title }}" src="{{ gallery.image_set.all.first.file.url }}" width="100%" />
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}
