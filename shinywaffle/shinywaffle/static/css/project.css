@@ -9,7 +9,7 @@
   color: #b94a48; }
 
 .navbar {
-  border-radius: 0; }
+  border-radius: 10px; }
 
 @media (max-width: 47.9em) {
   .navbar-nav .nav-item {
