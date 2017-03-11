@@ -62,16 +62,43 @@
 </div>
 
 
-<div class="navbar navbar-inverse navbar-fixed-left">
-  <ul class="nav navbar-nav">
-    <li>
-      <a class="nav-link" href="{% url 'home' %}">Home</a>
-    </li>
-    <li>
-      <a class="nav-link" href="{% url 'about' %}">About</a>
-    </li>
-  </ul>
+<!-- Fixed navbar -->
+<div class="navbar navbar-default navbar-fixed-side navbar-fixed-side-left" role="navigation">
+  <div class="container">
+    <ul class="nav navbar-nav">
+      <li>
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+      </li>
+      <li>
+        <a class="nav-link" href="{% url 'about' %}">About</a>
+      </li>
+    </ul>
+    <div class="dropdown show">
+      <a class="btn btn-secondary dropdown-toggle" href="https://example.com" id="dropdownMenuLink"
+         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dropdown link
+      </a>
+
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+{#<div class="navbar navbar-inverse navbar-fixed-left">#}
+{#  <ul class="nav navbar-nav">#}
+{#    <li>#}
+{#      <a class="nav-link" href="{% url 'home' %}">Home</a>#}
+{#    </li>#}
+{#    <li>#}
+{#      <a class="nav-link" href="{% url 'about' %}">About</a>#}
+{#    </li>#}
+{#  </ul>#}
+{#</div>#}
 
 <div class="container">
 
@@ -94,14 +121,14 @@
 <!-- Placed at the end of the document so the pages load faster -->
 {% block javascript %}
   <!-- Required by Bootstrap v4 Alpha 4 -->
-  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-          integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"
+          integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7"
           crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
           integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
           crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
-          integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"
+          integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU"
           crossorigin="anonymous"></script>
 
   <!-- Your stuff: Third-party javascript libraries go here -->
