@@ -22,7 +22,7 @@ class Gallery(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('gallery:detail', kwargs={'title': self.title})
+        return reverse('galleries:detail', kwargs={'title': self.title})
 
 
 class Image(models.Model):
