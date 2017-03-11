@@ -63,7 +63,7 @@
 </div>
 
 <div class="container">
-
+    {% if request.user.is_authenticated %}
   <!-- Fixed navbar -->
   <div id="main-wrapper" class="row">
     <div class="container col-md-3 col-xs-12">
@@ -90,7 +90,7 @@
         </div>
       </div>
     </div>
-
+    {% endif %}
     <div class="main-content container col-md-9 col-xs-12">
       {% if messages %}
         {% for message in messages %}
