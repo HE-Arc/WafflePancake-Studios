@@ -65,34 +65,28 @@
 
   <!-- Fixed navbar -->
   <div class="row">
-    <div class="container col-md-3 col-md-push-9 col-xs-12">
+    <div class="container col-md-3 col-xs-12">
       <div class="navbar navbar-default navbar-fixed-side navbar-fixed-side-left" role="navigation">
         <div class="container">
           <ul class="nav navbar-nav">
-            <li>
-              <a class="nav-link" href="{% url 'home' %}">Home</a>
+            <li class="col-sm-3 col-md-12">
+              <a class="nav-link" href="{% url 'home' %}">Favorites</a>
             </li>
-            <li>
-              <a class="nav-link" href="{% url 'about' %}">About</a>
+            <li class="col-sm-3 col-md-12">
+              <a class="nav-link" href="{% url 'home' %}">Explore</a>
+            </li>
+            <li class="col-sm-3 col-md-12">
+              <a class="nav-link" href="{% url 'home' %}">Galleries</a>
+            </li>
+            <li class="col-sm-3 col-smd-12">
+              <a class="nav-link" href="{% url 'home' %}">Friends</a>
             </li>
           </ul>
-          <div class="dropdown show">
-            <a class="btn btn-secondary dropdown-toggle" href="https://example.com" id="dropdownMenuLink"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown link
-            </a>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div>
         </div>
       </div>
     </div>
 
-    <div class="container col-md-9 col-md-pull-3 col-xs-12">
+    <div class="container col-md-9 col-xs-12">
       {% if messages %}
         {% for message in messages %}
           <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
