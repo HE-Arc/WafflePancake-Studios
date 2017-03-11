@@ -15,6 +15,7 @@
 
   {% block css %}
     <!-- Latest compiled and minified Bootstrap 4 Alpha 4 CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css"
           integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
 
@@ -61,56 +62,48 @@
   </nav>
 </div>
 
-
-<!-- Fixed navbar -->
-<div class="navbar navbar-default navbar-fixed-side navbar-fixed-side-left" role="navigation">
-  <div class="container">
-    <ul class="nav navbar-nav">
-      <li>
-        <a class="nav-link" href="{% url 'home' %}">Home</a>
-      </li>
-      <li>
-        <a class="nav-link" href="{% url 'about' %}">About</a>
-      </li>
-    </ul>
-    <div class="dropdown show">
-      <a class="btn btn-secondary dropdown-toggle" href="https://example.com" id="dropdownMenuLink"
-         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Dropdown link
-      </a>
-
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-{#<div class="navbar navbar-inverse navbar-fixed-left">#}
-{#  <ul class="nav navbar-nav">#}
-{#    <li>#}
-{#      <a class="nav-link" href="{% url 'home' %}">Home</a>#}
-{#    </li>#}
-{#    <li>#}
-{#      <a class="nav-link" href="{% url 'about' %}">About</a>#}
-{#    </li>#}
-{#  </ul>#}
-{#</div>#}
-
 <div class="container">
 
-  {% if messages %}
-    {% for message in messages %}
-      <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
-    {% endfor %}
-  {% endif %}
+  <!-- Fixed navbar -->
+  <div id="main-wrapper" class="row">
+    <div class="container col-md-3 col-xs-12">
+      <div class="navbar navbar-default navbar-fixed-side navbar-fixed-side-left" role="navigation">
+        <div class="container">
+          <ul class="nav navbar-nav">
+            <li class="col-xs-3 col-sm-3 col-md-12">
+              <a class="nav-link hidden-xs-down" href="{% url 'home' %}">Favorites</a>
+              <a class="nav-link hidden-sm-up" href="{% url 'home' %}"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></a>
+            </li>
+            <li class="col-xs-3 col-sm-3 col-md-12">
+              <a class="nav-link hidden-xs-down" href="{% url 'home' %}">Explore</a>
+              <a class="nav-link hidden-sm-up" href="{% url 'home' %}"><span aria-hidden="true" class="glyphicon glyphicon-plane"></span></a>
+            </li>
+            <li class="col-xs-3 col-sm-3 col-md-12">
+              <a class="nav-link hidden-xs-down" href="{% url 'home' %}">My Galleries</a>
+              <a class="nav-link hidden-sm-up" href="{% url 'home' %}"><span aria-hidden="true" class="glyphicon glyphicon-picture"></span></a>
+            </li>
+            <li class="col-xs-3 col-sm-3 col-smd-12">
+              <a class="nav-link hidden-xs-down" href="{% url 'home' %}">Friends</a>
+              <a class="nav-link hidden-sm-up" href="{% url 'home' %}"><span aria-hidden="true" class="glyphicon glyphicon-user"></span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-  {% block content %}
-    <p>Use this document as a way to quick start any new project.</p>
-  {% endblock content %}
+    <div class="main-content container col-md-9 col-xs-12">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+
+      {% block content %}
+        <p>Use this document as a way to quick start any new project.</p>
+      {% endblock content %}
+    </div>
+  </div>
+
 
 </div> <!-- /container -->
 

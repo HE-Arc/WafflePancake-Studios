@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-from ..users.models import User
+from django.conf import settings
 
 
 @python_2_unicode_compatible
@@ -16,7 +16,9 @@ class Gallery(models.Model):
     title = models.CharField(
         _('Title of Gallery'), blank=False, max_length=255)
 
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE, )
 
     def __str__(self):
         return self.title
@@ -25,6 +27,7 @@ class Gallery(models.Model):
         return reverse('galleries:detail', kwargs={'title': self.title})
 
 
+@python_2_unicode_compatible
 class Image(models.Model):
     title = models.CharField(_('Title of Image'), blank=False, max_length=255)
     gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE)
