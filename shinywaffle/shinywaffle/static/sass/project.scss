@@ -48,13 +48,8 @@ $red: #b94a48;
   z-index: 1000;
   min-height: 5px;
   min-width: 5px;
-  max-width: 200px;
   margin-bottom: 0;
   border: 0 solid transparent;
-}
-.navbar-fixed-side .navbar-toggle {
-  //float: none;
-  margin: 0;
 }
 .navbar-fixed-side .nav > li > a {
   width: 100%;
@@ -63,9 +58,9 @@ $red: #b94a48;
 .navbar-fixed-side .navbar-nav {
   margin: 0;
 }
-//.navbar-fixed-side .navbar-nav > li {
-//  float: none;
-//}
+.navbar-fixed-side .navbar-nav > li {
+  display: inline-block;
+}
 .navbar-fixed-side .navbar-nav > li > a {
   padding: 5px;
   line-height: 20px;
