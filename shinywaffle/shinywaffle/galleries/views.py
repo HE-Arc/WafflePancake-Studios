@@ -8,6 +8,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Gallery
 
+from django.contrib.auth.decorators import login_required
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
+
 
 class GalleryListView(LoginRequiredMixin, ListView):
     model = Gallery
@@ -18,3 +23,13 @@ class GalleryListView(LoginRequiredMixin, ListView):
 
 class GalleryDetailView(LoginRequiredMixin, DetailView):
     model = Gallery
+
+
+@login_required
+def GalleryNewFormView(request):
+    return render(request, 'galleries/gallery_new_form.html')
+
+
+@login_required
+def GalleryEditFormView(request, id):
+    return render(request, 'galleries/gallery_edit_form.html', {id: id})
