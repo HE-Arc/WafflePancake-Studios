@@ -15,6 +15,7 @@
 
   {% block css %}
     <!-- Latest compiled and minified Bootstrap 4 Alpha 4 CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css"
           integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
 
@@ -64,29 +65,33 @@
 <div class="container">
 
   <!-- Fixed navbar -->
-  <div class="row">
+  <div id="main-wrapper" class="row">
     <div class="container col-md-3 col-xs-12">
       <div class="navbar navbar-default navbar-fixed-side navbar-fixed-side-left" role="navigation">
         <div class="container">
           <ul class="nav navbar-nav">
-            <li class="col-sm-3 col-md-12">
-              <a class="nav-link" href="{% url 'home' %}">Favorites</a>
+            <li class="col-xs-3 col-sm-3 col-md-12">
+              <a class="nav-link hidden-xs-down" href="{% url 'home' %}">Favorites</a>
+              <a class="nav-link hidden-sm-up" href="{% url 'home' %}"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></a>
             </li>
-            <li class="col-sm-3 col-md-12">
-              <a class="nav-link" href="{% url 'home' %}">Explore</a>
+            <li class="col-xs-3 col-sm-3 col-md-12">
+              <a class="nav-link hidden-xs-down" href="{% url 'home' %}">Explore</a>
+              <a class="nav-link hidden-sm-up" href="{% url 'home' %}"><span aria-hidden="true" class="glyphicon glyphicon-plane"></span></a>
             </li>
-            <li class="col-sm-3 col-md-12">
-              <a class="nav-link" href="{% url 'home' %}">Galleries</a>
+            <li class="col-xs-3 col-sm-3 col-md-12">
+              <a class="nav-link hidden-xs-down" href="{% url 'home' %}">My Galleries</a>
+              <a class="nav-link hidden-sm-up" href="{% url 'home' %}"><span aria-hidden="true" class="glyphicon glyphicon-picture"></span></a>
             </li>
-            <li class="col-sm-3 col-smd-12">
-              <a class="nav-link" href="{% url 'home' %}">Friends</a>
+            <li class="col-xs-3 col-sm-3 col-smd-12">
+              <a class="nav-link hidden-xs-down" href="{% url 'home' %}">Friends</a>
+              <a class="nav-link hidden-sm-up" href="{% url 'home' %}"><span aria-hidden="true" class="glyphicon glyphicon-user"></span></a>
             </li>
           </ul>
         </div>
       </div>
     </div>
 
-    <div class="container col-md-9 col-xs-12">
+    <div class="main-content container col-md-9 col-xs-12">
       {% if messages %}
         {% for message in messages %}
           <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
