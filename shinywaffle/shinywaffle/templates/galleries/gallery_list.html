@@ -13,6 +13,9 @@
               href="{% url 'galleries:detail' pk=gallery.id %}">{{ gallery.title }}</a></h4>
           <img alt="{{ gallery.image_set.all.first.title }}" src="{{ gallery.image_set.all.first.file.url }}"
                width="100%"/>
+               {% for image in gallery.image_set.all %}
+                 <img alt="{{ image.title }}" src="{{ image.file.url }}" width="100%"/>
+               {% endfor %}
         </div>
       {% endfor %}
     </div>
