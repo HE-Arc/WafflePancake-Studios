@@ -30,5 +30,5 @@ def GalleryNewFormView(request):
 
 
 @login_required
-def GalleryEditFormView(request, id):
-    return render(request, 'galleries/gallery_edit_form.html', {id: id})
+def GalleryEditFormView(request, pk):
+    return render(request, 'galleries/gallery_edit_form.html', {id: pk})
