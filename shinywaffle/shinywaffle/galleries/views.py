@@ -10,8 +10,9 @@ from .models import Gallery
 
 from django.contrib.auth.decorators import login_required
 
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
+
+from .forms import GalleryNewForm, GalleryEditForm
 
 
 class GalleryListView(LoginRequiredMixin, ListView):
@@ -27,7 +28,21 @@ class GalleryDetailView(LoginRequiredMixin, DetailView):
 
 @login_required
 def GalleryNewFormView(request):
-    return render(request, 'galleries/gallery_new_form.html')
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = GalleryNewForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return render(request, 'galleries/gallery_list.html')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = GalleryNewForm()
+    return render(request, 'galleries/gallery_new_form.html', {'form': form})
 
 
 @login_required
