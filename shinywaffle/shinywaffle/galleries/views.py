@@ -15,11 +15,10 @@ from django.shortcuts import render
 from .forms import GalleryNewForm, GalleryEditForm
 
 
-class GalleryListView(LoginRequiredMixin, ListView):
-    model = Gallery
-    # These next two lines tell the view to index lookups by username
-    slug_field = 'title'
-    slug_url_kwarg = 'title'
+@login_required
+def GalleryListView(request):
+    galleries = Gallery.objects.all()
+    return render(request, 'galleries/gallery_list.html', {'galleries_list': galleries})
 
 
 class GalleryDetailView(LoginRequiredMixin, DetailView):
