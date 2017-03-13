@@ -5,10 +5,17 @@
 {% block content %}
   <div class="container">
     <h2>Nouvelle gallerie</h2>
+
+    {% load bootstrap4 %}
+
     <form action="{% url 'galleries:new' %}" method="post">
         {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit" />
+        {% bootstrap_form form %}
+        {% buttons %}
+          <button type="submit" class="btn btn-primary">
+              {% bootstrap_icon "star" %} Submit
+          </button>
+        {% endbuttons %}
     </form>
   </div>
 {% endblock content %}
