@@ -45,3 +45,4 @@ redis>=2.10.5
 
 
 # Your custom requirements go here
+-e git+https://github.com/GabrielUlici/django-bootstrap4#egg=django-bootstrap4
