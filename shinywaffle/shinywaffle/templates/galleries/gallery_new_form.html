@@ -6,16 +6,12 @@
   <div class="container">
     <h2>Nouvelle gallerie</h2>
 
-    {% load bootstrap4 %}
-
     <form action="{% url 'galleries:new' %}" method="post">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons %}
-          <button type="submit" class="btn btn-primary">
-              {% bootstrap_icon "star" %} Submit
-          </button>
-        {% endbuttons %}
+      {% csrf_token %}
+
+      {% load crispy_forms_tags %}
+
+      {% crispy form %}
     </form>
   </div>
 {% endblock content %}
