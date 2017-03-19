@@ -1,7 +1,7 @@
 from django import forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field
-from crispy_forms.bootstrap import AppendedText, PrependedText, FormActions, InlineField
+from crispy_forms.layout import Layout, ButtonHolder, Submit, HTML
+from crispy_forms.bootstrap import InlineField
 
 
 class GalleryNewForm(forms.Form):
@@ -11,10 +11,11 @@ class GalleryNewForm(forms.Form):
     helper.form_class = 'form-inline'
     helper.layout = Layout(
         InlineField('gallery_name'),
-        FormActions(
+        ButtonHolder(
             Submit('save_changes', 'Save changes', css_class="btn-primary"),
-            Submit('cancel', 'Cancel', css_class='btn-secondary'),
-        )
+            HTML('<a class="btn btn-secondary" href={% url "galleries:index" %}>Cancel</a>')  # not sure about this
+        ),
+
     )
 
 
