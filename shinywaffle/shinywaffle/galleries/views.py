@@ -25,20 +25,17 @@ class GalleryDetailView(LoginRequiredMixin, DetailView):
 
 @login_required
 def GalleryNewFormView(request):
-    success_url = 'galleries:index'
-
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
-        if "cancel" in request.POST:
-            return redirect(success_url)
         # create a form instance and populate it with data from the request:
         form = GalleryNewForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
-            # ...
+            gallery = Gallery(title=request.POST.get('gallery_name'), author_id=request.user.id)
+            gallery.save()
             # redirect to a new URL:
-            return redirect(success_url)
+            return redirect('galleries:index')
 
     # if a GET (or any other method) we'll create a blank form
     else:
