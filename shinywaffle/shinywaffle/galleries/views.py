@@ -14,7 +14,7 @@ from .forms import GalleryNewForm, GalleryEditForm
 
 
 @login_required
-def GalleryListView(request):
+def gallery_list_view(request):
     galleries = Gallery.objects.all()
     return render(request, 'galleries/gallery_list.html', {'galleries_list': galleries})
 
@@ -24,7 +24,7 @@ class GalleryDetailView(LoginRequiredMixin, DetailView):
 
 
 @login_required
-def GalleryNewFormView(request):
+def gallery_new_form_view(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -44,5 +44,5 @@ def GalleryNewFormView(request):
 
 
 @login_required
-def GalleryEditFormView(request, pk):
+def gallery_edit_form_view(request, pk):
     return render(request, 'galleries/gallery_edit_form.html', {id: pk})
