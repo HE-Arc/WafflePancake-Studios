@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 
-from django.views.generic import DetailView, ListView, RedirectView, UpdateView
+from django.views.generic import DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Gallery, Image
@@ -23,8 +23,19 @@ class GalleryDetailView(LoginRequiredMixin, DetailView):
     model = Gallery
 
 
-#  Convert form methods to classes
+class GalleryEditFormView(CreateView):
+    model = Image
+    fields = ['title', 'file']
 
+    def gallery(self):
+        return Gallery.objects.get(pk=self.kwargs['pk'])
+
+    def form_valid(self, form):
+        form.instance.gallery_id = int(self.kwargs['pk'])
+        return super().form_valid(form)
+
+
+#  Convert form methods to classes
 @login_required
 def gallery_new_form_view(request):
     # if this is a POST request we need to process the form data
@@ -44,10 +55,12 @@ def gallery_new_form_view(request):
         form = GalleryNewForm()
     return render(request, 'galleries/gallery_new_form.html', {'form': form})
 
-
+'''
 @login_required
-def GalleryEditFormView(request, pk):
+def gallery_edit_form_view(request, pk):
     # if this is a POST request we need to process the form data
+
+    form = GalleryEditForm()
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = GalleryEditForm(request.POST)
@@ -60,8 +73,9 @@ def GalleryEditFormView(request, pk):
             # process the data in form.cleaned_data as required
             # redirect to a new URL:
             return redirect('galleries:detail', {'id': pk})
+        else:
+            messages.add_message(request, messages.ERROR, form.errors)
 
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = GalleryEditForm()
-    return render(request, 'galleries/gallery_edit_form.html', {'id': pk, 'form': form})
+    return render(request, 'galleries/image_form.html', {'id': pk, 'form': form})
+
+'''

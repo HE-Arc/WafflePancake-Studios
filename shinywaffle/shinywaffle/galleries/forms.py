@@ -20,7 +20,7 @@ class GalleryNewForm(forms.Form):
 
 class GalleryEditForm(forms.Form):
     image_name = forms.CharField(max_length=50)
-    images = forms.FileField()
+    images = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
 
     helper = FormHelper()
     helper.form_class = 'form-inline'

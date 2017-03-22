@@ -24,8 +24,8 @@ urlpatterns = [
     url(regex=r'^(?P<pk>\d)/$',
         view=views.GalleryDetailView.as_view(),
         name='detail'),
-    url(regex=r'^edit/(?P<pk>\d)/$',
-        view=views.gallery_edit_form_view,
+    url(regex=r'^(?P<pk>\d)/image/new/$',
+        view=views.GalleryEditFormView.as_view(),
         name='edit')
     # url(
     #     regex=r'^~update/$',
