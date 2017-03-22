@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% load friendshiptags %}
+{% block title %}Members{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Friends User's</h2>
+
+  <div class="list-group">
+     <h3>
+    {% get_by_name friendship_context_object_name as var %}
+    {% friends var %}
+    </h3>
+  </div>
+</div>
+{% endblock content %}
