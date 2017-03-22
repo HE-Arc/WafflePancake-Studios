@@ -13,10 +13,9 @@ from django.shortcuts import render, redirect
 from .forms import GalleryNewForm, GalleryEditForm
 
 
-@login_required
-def gallery_list_view(request):
-    galleries = Gallery.objects.all()
-    return render(request, 'galleries/gallery_list.html', {'galleries_list': galleries})
+class GalleryListView(LoginRequiredMixin, ListView):
+    model = Gallery
+    template_name = "galleries/gallery_list.html"
 
 
 class GalleryDetailView(LoginRequiredMixin, DetailView):
@@ -45,7 +44,9 @@ def gallery_new_form_view(request):
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
-            gallery = Gallery(title=request.POST.get('gallery_name'), author_id=request.user.id)
+            gallery = Gallery(
+                title=request.POST.get('gallery_name'),
+                author_id=request.user.id)
             gallery.save()
             # redirect to a new URL:
             return redirect('galleries:index')

@@ -7,9 +7,9 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h2>{{ object.title }}</h2>
+        <h2>{{ gallery.title }}</h2>
         <ul>
-          {% for image in object.image_set.all %}
+          {% for image in gallery.image_set.all %}
             <li><img alt="{{ image.title }}" src="{{ image.file.url }}" width="100%"/></li>
           {% endfor %}
         </ul>

@@ -11,7 +11,7 @@ urlpatterns = [
     #     view=views.GalleryListView.as_view(),
     #     name='list'
     # ),
-    url(regex=r'^$', view=views.gallery_list_view,
+    url(regex=r'^$', view=views.GalleryListView.as_view(),
         name='index'),
     url(regex=r'^new/$', view=views.gallery_new_form_view,
         name='new'),
