@@ -13,7 +13,7 @@ urlpatterns = [
     # ),
     url(regex=r'^$', view=views.GalleryListView.as_view(),
         name='index'),
-    url(regex=r'^new/$', view=views.gallery_new_form_view,
+    url(regex=r'^new/$', view=views.GalleryNewFormView.as_view(),
         name='new'),
     # url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
     # url(
