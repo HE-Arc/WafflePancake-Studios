@@ -17,9 +17,16 @@ class GalleryListView(LoginRequiredMixin, ListView):
     model = Gallery
     template_name = "galleries/gallery_list.html"
 
+    def deleteGallery(self):
+        data = self.request.POST
+        print(data)
+
 
 class GalleryDetailView(LoginRequiredMixin, DetailView):
     model = Gallery
+
+    def deleteImage(self):
+        pass
 
 
 class GalleryEditFormView(CreateView):
