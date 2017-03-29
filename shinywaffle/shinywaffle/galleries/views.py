@@ -3,6 +3,7 @@ from __future__ import absolute_import, unicode_literals
 
 from django.views.generic import DetailView, CreateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse
 
 from .models import Gallery, Image
 
@@ -17,9 +18,11 @@ class GalleryListView(LoginRequiredMixin, ListView):
     model = Gallery
     template_name = "galleries/gallery_list.html"
 
-    def deleteGallery(self):
-        data = self.request.POST
-        print(data)
+
+def delete_gallery(request):
+    data = request.POST.get('id')
+    print(data)
+    return HttpResponse(status=200)
 
 
 class GalleryDetailView(LoginRequiredMixin, DetailView):

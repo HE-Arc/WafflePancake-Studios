@@ -8,9 +8,9 @@ from . import views
 urlpatterns = [
     url(regex=r'^$', view=views.GalleryListView.as_view(),
         name='index'),
-    url(regex=r'^delete/$', view=views.GalleryListView.deleteGallery),
     url(regex=r'^new/$', view=views.GalleryNewFormView.as_view(),
         name='new'),
+    url(regex=r'^delete/$', view=views.delete_gallery),
 
     url(regex=r'^(?P<pk>\d)/$',
         view=views.GalleryDetailView.as_view(),
