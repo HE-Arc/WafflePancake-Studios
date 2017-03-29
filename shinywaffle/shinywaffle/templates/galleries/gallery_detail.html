@@ -10,7 +10,13 @@
         <h2>{{ gallery.title }}</h2>
         <ul>
           {% for image in gallery.image_set.all %}
-            <li><img alt="{{ image.title }}" src="{{ image.file.url }}" width="100%"/></li>
+            <li><img alt="{{ image.title }}" src="{{ image.file.url }}" width="100%"/>
+              {% if gallery.author.id == user.id or user.is_superuser %}
+              <button id="{{ image.id }}_delete" class="btn btn-danger delete-button-image">
+                <span aria-hidden="true" class="glyphicon glyphicon-trash delegate"></span>
+              </button>
+              {% endif %}
+            </li>
           {% endfor %}
         </ul>
       </div>

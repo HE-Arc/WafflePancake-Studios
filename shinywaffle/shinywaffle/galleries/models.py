@@ -24,7 +24,7 @@ class Gallery(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('galleries:detail', kwargs={'title': self.title})
+        return reverse('galleries:index')  # , kwargs={'pk': self.title})
 
 
 @python_2_unicode_compatible
