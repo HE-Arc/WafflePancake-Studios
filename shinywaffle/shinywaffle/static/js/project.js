@@ -53,7 +53,7 @@ function deleteImage(event) {
 
 function deleteGallery(event) {
     var url = '/galleries/delete/';
-    var method = 'DELETE';
+    var method = 'POST';
     var id = splitDelete(event.target.id);
     var data = {id: id};
 

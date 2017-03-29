@@ -20,8 +20,8 @@ class GalleryListView(LoginRequiredMixin, ListView):
 
 
 def delete_gallery(request):
-    data = request.POST.get('id')
-    print(data)
+    id = request.POST.get('id')
+    Gallery.objects.get(pk=id).delete()
     return HttpResponse(status=200)
 
 
