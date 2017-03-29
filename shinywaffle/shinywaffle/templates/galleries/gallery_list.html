@@ -13,6 +13,7 @@
               href="{% url 'galleries:detail' pk=gallery.id %}">{{ gallery.title }}</a></h4>
           <img alt="{{ gallery.image_set.all.first.title }}" src="{{ gallery.image_set.all.first.file.url }}"
               width="100%"/>
+        <a href="#" onclick="deleteGallery({{ gallery }})"><span aria-hidden="true" class="glyphicon glyphicon-trash"></span></a>
         </div>
       {% endfor %}
     </div>

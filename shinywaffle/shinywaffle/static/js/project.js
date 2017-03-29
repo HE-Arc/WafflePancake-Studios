@@ -19,3 +19,11 @@ Issues with the above approach:
 4. Undocumented: No mention in the documentation, or it's too hard for me to find
 */
 $('.form-group').removeClass('row');
+
+function deleteImage(image) {
+    console.log(image);
+}
+
+function deleteGallery(gallery) {
+    console.log(gallery);
+}

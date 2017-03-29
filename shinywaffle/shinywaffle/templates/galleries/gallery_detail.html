@@ -10,7 +10,8 @@
         <h2>{{ gallery.title }}</h2>
         <ul>
           {% for image in gallery.image_set.all %}
-            <li><img alt="{{ image.title }}" src="{{ image.file.url }}" width="100%"/></li>
+            <li><img alt="{{ image.title }}" src="{{ image.file.url }}" width="100%"/>
+              <a href="#" onclick="deleteImage({{ image }})"><span aria-hidden="true" class="glyphicon glyphicon-trash"></span></a></li>
           {% endfor %}
         </ul>
       </div>
