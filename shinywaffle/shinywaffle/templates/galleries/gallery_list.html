@@ -1,5 +1,8 @@
 {% extends "base.html" %}
+
 {% load static i18n %}
+{% load thumbnail %}
+
 {% block title %}Galleries{% endblock %}
 
 {% block content %}
@@ -11,14 +14,12 @@
           <h4 class="list-group-item-heading">
             <a href="{% url 'galleries:detail' pk=gallery.id %}">{{ gallery.title }}</a>
           </h4>
-          <img alt="{{ gallery.image_set.all.first.title }}" src="{{ gallery.image_set.all.first.file.url }}"
-              width="100%"/>
-
-              {% if gallery.author.id == user.id or user.is_superuser %}
+          <img src="{{ gallery.image_set.all.first.file | thumbnail_url:'gallery-thumb' }}" alt="{{ gallery.image_set.all.first.title }}" />
+            {% if gallery.author.id == user.id or user.is_superuser %}
               <button id="{{ gallery.id }}_delete" class="btn btn-danger delete-button-gallery">
                 <span id="{{ gallery.id }}" aria-hidden="true" class="glyphicon glyphicon-trash delegate"></span>
               </button>
-              {%  endif %}
+            {%  endif %}
         </div>
       {% endfor %}
     </div>
