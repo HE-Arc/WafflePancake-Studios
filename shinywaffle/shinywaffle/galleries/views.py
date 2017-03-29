@@ -19,17 +19,10 @@ class GalleryListView(LoginRequiredMixin, ListView):
     template_name = "galleries/gallery_list.html"
 
 
-def delete_gallery(request):
-    id = request.POST.get('id')
-    Gallery.objects.get(pk=id).delete()
-    return HttpResponse(status=200)
-
-
 class GalleryDetailView(LoginRequiredMixin, DetailView):
     model = Gallery
 
-    def deleteImage(self):
-        pass
+
 
 
 class GalleryEditFormView(CreateView):
@@ -52,3 +45,18 @@ class GalleryNewFormView(CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+# AJAX METHODS
+
+
+def delete_gallery(request):
+    id = request.POST.get('id')
+    Gallery.objects.get(pk=id).delete()
+    return HttpResponse(status=200)
+
+
+def delete_image(request):
+    id = request.POST.get('id')
+    Image.objects.get(pk=id).delete()
+    return HttpResponse(status=200)

@@ -26,11 +26,32 @@ $('.form-group').removeClass('row');
 ///////////////////////////////////////////
 
 
+
+///////////////////////////////////////////
+//////////////////TOOLS////////////////////
+///////////////////////////////////////////
+
+const urls = {
+    deleteImage: '/galleries/images/delete/',
+    deleteGallery: '/galleries/delete/'
+};
+
 var splitDelete = strip('_delete');
 var splitUpdate = strip('_update');
 
+function strip(pattern) {
+    return function (id) {
+        return id.split(pattern)[0];
+    }
+}
+
+
+///////////////////////////////////////////
+//////////////////INIT/////////////////////
+///////////////////////////////////////////
 
 $(function () {
+    ajaxSetup();
     addEventListeners();
 });
 
@@ -46,34 +67,55 @@ function closestClick(event) {
     event.stopPropagation();
 }
 
+
+///////////////////////////////////////////
+//////////////////DELETE///////////////////
+///////////////////////////////////////////
+
 function deleteImage(event) {
+    var url = urls.deleteImage;
     var id = splitDelete(event.target.id);
-    console.log(id);
+    deleteObject(id, url, function(data) {
+        console.log('image deleted', data);
+    })
 }
 
 function deleteGallery(event) {
-    var url = '/galleries/delete/';
-    var method = 'POST';
+    var url = urls.deleteGallery;
     var id = splitDelete(event.target.id);
+
+    deleteObject(id, url, function(data) {
+        console.log('gallery deleted', data);
+    })
+}
+
+function deleteObject(id, url, success) {
+    var method = 'POST';
     var data = {id: id};
 
     ajaxDriver(url, method, data)
-        .done(function (data) {
-            console.log('win', data);
-        })
+        .done(success)
         .fail(function (data, error, status) {
             console.log(data.responseText, data, status);
         })
 }
 
-function strip(pattern) {
-    return function (id) {
-        return id.split(pattern)[0];
-    }
-}
 
+
+///////////////////////////////////////////
+//////////////////AJAX/////////////////////
+///////////////////////////////////////////
 
 function ajaxDriver(url, method, data) {
+    return $.ajax({
+        url: url,
+        type: method,
+        data: data,
+        dataType: 'json'
+    })
+}
+
+function ajaxSetup() {
     var csrftoken = getCookie('csrftoken'); //Cookies.get('csrftoken');
     $.ajaxSetup({
         beforeSend: function (xhr, settings) {
@@ -82,12 +124,6 @@ function ajaxDriver(url, method, data) {
             }
         }
     });
-    return $.ajax({
-        url: url,
-        type: method,
-        data: data,
-        dataType: 'json'
-    })
 }
 
 function csrfSafeMethod(method) {

@@ -10,14 +10,14 @@ urlpatterns = [
         name='index'),
     url(regex=r'^new/$', view=views.GalleryNewFormView.as_view(),
         name='new'),
-    url(regex=r'^delete/$', view=views.delete_gallery),
 
     url(regex=r'^(?P<pk>\d)/$',
         view=views.GalleryDetailView.as_view(),
         name='detail'),
-    url(regex=r'^(?P<pk>\d)/delete/$',
-        view=views.GalleryDetailView.deleteImage),
     url(regex=r'^(?P<pk>\d)/image/new/$',
         view=views.GalleryEditFormView.as_view(),
-        name='edit')
+        name='edit'),
+
+    url(regex=r'^images/delete/$', view=views.delete_image),
+    url(regex=r'^delete/$', view=views.delete_gallery),
 ]
