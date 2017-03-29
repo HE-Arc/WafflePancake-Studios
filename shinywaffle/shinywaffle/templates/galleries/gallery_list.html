@@ -12,7 +12,7 @@
       {% for gallery in gallery_list %}
         <div class="list-group-item">
           <h4 class="list-group-item-heading">
-              <a href="{% url 'galleries:detail' pk=gallery.id %}">{{ gallery.title }}</a>
+            <a href="{% url 'galleries:detail' pk=gallery.id %}">{{ gallery.title }}</a>
           </h4>
           <img src="{{ gallery.image_set.all.first.file | thumbnail_url:'gallery-thumb' }}" alt="{{ gallery.image_set.all.first.title }}" />
             {% if gallery.author.id == user.id or user.is_superuser %}
