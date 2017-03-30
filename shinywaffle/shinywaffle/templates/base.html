@@ -1,4 +1,5 @@
-{% load staticfiles i18n %}<!DOCTYPE html>
+{% load staticfiles i18n %}
+{% load bootstrap4 %}<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -14,11 +15,7 @@
     <![endif]-->
 
   {% block css %}
-    <!-- Latest compiled and minified Bootstrap 4 Alpha 4 CSS -->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css"
-          integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
-
+    {% bootstrap_css %}
     <!-- Your stuff: Third-party CSS libraries go here -->
 
     <!-- This file stores project-specific CSS -->
@@ -29,9 +26,8 @@
 </head>
 
 <body>
-
 <div class="m-b-1">
-  <nav class="navbar navbar-dark navbar-static-top bg-inverse">
+  <nav class="navbar navbar-inverse navbar-static-top bg-inverse">
     <div class="container">
       <a class="navbar-brand" href="/">Shiny Waffle</a>
       <button type="button" class="navbar-toggler hidden-sm-up pull-xs-right" data-toggle="collapse"
@@ -109,25 +105,18 @@
 
 {% block modal %}{% endblock modal %}
 
-<!-- Le javascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
+{% comment %}
+Le javascript
+==================================================
+Placed at the end of the document so the pages load faster
+{% endcomment %}
 {% block javascript %}
-  <!-- Required by Bootstrap v4 Alpha 4 -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"
-          integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7"
-          crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
-          integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-          crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js"
-          integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU"
-          crossorigin="anonymous"></script>
+  {% bootstrap_javascript jquery=True %}
+  {% comment %}
+  Your stuff: Third-party javascript libraries go here
 
-  <!-- Your stuff: Third-party javascript libraries go here -->
-
-  <!-- place project specific Javascript in this file -->
-
+  place project specific Javascript in this file
+  {% endcomment %}
   <script src="{% static 'js/project.js' %}"></script>
 
 
