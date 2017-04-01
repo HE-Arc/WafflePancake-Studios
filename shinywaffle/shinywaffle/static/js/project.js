@@ -74,32 +74,61 @@ function closestClick(event) {
 
 function deleteImage(event) {
     var url = urls.deleteImage;
-    var id = splitDelete(event.target.id);
-    deleteObject(id, url, function(data) {
-        console.log('image deleted', data);
-    })
+    var target = event.target;
+    var delImage = new AjaxProcess(target);
+    deleteObject(event, url, delImage);
 }
 
 function deleteGallery(event) {
     var url = urls.deleteGallery;
-    var id = splitDelete(event.target.id);
-
-    deleteObject(id, url, function(data) {
-        console.log('gallery deleted', data);
-    })
+    var target = event.target;
+    var delGallery = new AjaxProcess(target);
+    deleteObject(event, url, delGallery);
 }
 
-function deleteObject(id, url, success) {
+function deleteObject(event, url, ajaxProcess) {
+    var id = splitDelete(event.target.id);
     var method = 'POST';
     var data = {id: id};
 
+    ajaxProcess.preprocess();
+
     ajaxDriver(url, method, data)
-        .done(success)
-        .fail(function (data, error, status) {
-            console.log(data.responseText, data, status);
-        })
+        .done(ajaxProcess.success)
+        .fail(ajaxProcess.fail)
 }
 
+
+class AjaxProcess {
+    constructor(object, args = {}) {
+        var p = this.m_preprocess;
+        var s = this.m_success;
+        var f = this.m_fail;
+
+        var {
+            preprocess = p,
+            success = s,
+            fail = f
+            } = args;
+
+        this.object = object;
+        this.preprocess = preprocess;
+        this.success = success;
+        this.fail = fail;
+    }
+
+    m_preprocess() {
+        console.log('preprocess');
+    }
+
+    m_success(data) {
+        console.log('win', data);
+    }
+
+    m_fail(data, error, details) {
+        console.log('fail', data, error, details);
+    }
+}
 
 
 ///////////////////////////////////////////

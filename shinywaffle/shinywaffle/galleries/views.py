@@ -3,7 +3,7 @@ from __future__ import absolute_import, unicode_literals
 
 from django.views.generic import DetailView, CreateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 from .models import Gallery, Image
 
@@ -53,10 +53,12 @@ class GalleryNewFormView(CreateView):
 def delete_gallery(request):
     id = request.POST.get('id')
     Gallery.objects.get(pk=id).delete()
-    return HttpResponse(status=200)
+    data = {'id': id, 'message': 'Gallery deleted correctly'}
+    return JsonResponse(data, status=200)
 
 
 def delete_image(request):
     id = request.POST.get('id')
     Image.objects.get(pk=id).delete()
-    return HttpResponse(status=200)
+    data = {'id': id, 'message': 'Image deleted correctly'}
+    return JsonResponse(data, status=200)

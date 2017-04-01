@@ -11,10 +11,10 @@ urlpatterns = [
     url(regex=r'^new/$', view=views.GalleryNewFormView.as_view(),
         name='new'),
 
-    url(regex=r'^(?P<pk>\d)/$',
+    url(regex=r'^(?P<pk>\d+)/$',
         view=views.GalleryDetailView.as_view(),
         name='detail'),
-    url(regex=r'^(?P<pk>\d)/image/new/$',
+    url(regex=r'^(?P<pk>\d+)/image/new/$',
         view=views.GalleryEditFormView.as_view(),
         name='edit'),
 
