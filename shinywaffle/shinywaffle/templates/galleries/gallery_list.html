@@ -10,7 +10,7 @@
     <h2>Galleries</h2>
     <div class="list-group">
       {% for gallery in gallery_list %}
-        <div class="list-group-item">
+        <div id="{{ gallery.id }}_master" class="list-group-item available">
           <h4 class="list-group-item-heading">
             <a href="{% url 'galleries:detail' pk=gallery.id %}">{{ gallery.title }}</a>
           </h4>

@@ -45,6 +45,17 @@ function strip(pattern) {
     }
 }
 
+function getMaster(target, splitMethod) {
+    var id = splitMethod(target) + '_master';
+    var object = $('#' + id);
+    return [id, object];
+}
+
+function switchClass(object, oldClass, newClass) {
+    object.removeClass(oldClass);
+    object.addClass(newClass);
+    return object;
+}
 
 ///////////////////////////////////////////
 //////////////////INIT/////////////////////
@@ -72,30 +83,29 @@ function closestClick(event) {
 //////////////////DELETE///////////////////
 ///////////////////////////////////////////
 
+
 function deleteImage(event) {
     var url = urls.deleteImage;
-    var target = event.target;
-    var delImage = new AjaxProcess(target);
-    deleteObject(event, url, delImage);
+    deleteObject(event, url);
 }
 
 function deleteGallery(event) {
     var url = urls.deleteGallery;
-    var target = event.target;
-    var delGallery = new AjaxProcess(target);
-    deleteObject(event, url, delGallery);
+    deleteObject(event, url);
 }
 
-function deleteObject(event, url, ajaxProcess) {
+function deleteObject(event, url) {
+    var [masterid, object] = getMaster(event.target.id, splitDelete);
+    var ajaxProcess = new AjaxProcess(object, {disabled: [event.target]});
     var id = splitDelete(event.target.id);
-    var method = 'POST';
     var data = {id: id};
+    var method = 'POST';
 
     ajaxProcess.preprocess();
 
     ajaxDriver(url, method, data)
-        .done(ajaxProcess.success)
-        .fail(ajaxProcess.fail)
+        .done((data) => ajaxProcess.success(data))
+        .fail((data, error, details) => ajaxProcess.fail(data, error, details))
 }
 
 
@@ -111,22 +121,27 @@ class AjaxProcess {
             fail = f
             } = args;
 
-        this.object = object;
+        this.master = object;
         this.preprocess = preprocess;
         this.success = success;
         this.fail = fail;
     }
 
     m_preprocess() {
-        console.log('preprocess');
+        switchClass(this.master, 'available', 'deleting');
+        this.master.find('*').addClass('disabled');
     }
 
     m_success(data) {
-        console.log('win', data);
+        this.master.slideUp();
     }
 
     m_fail(data, error, details) {
-        console.log('fail', data, error, details);
+        console.log(data.responseText);
+        console.log(data, error, details);
+        switchClass(this.master, 'deleting', 'delete-failed');
+        window.setTimeout(() => switchClass(this.master, 'delete-failed', 'available'), 1000);
+        this.master.find('*').removeClass('disabled');
     }
 }
 

@@ -85,6 +85,24 @@ $red: #b94a48;
   margin-top: 5px;
   padding: 5px;
 }
+
+
+
+.available {
+  opacity: 1;
+  transition: 5s;
+}
+
+.deleting {
+  opacity: 0.3;
+  transition: 450ms;
+}
+
+.delete-failed {
+  opacity: 1;
+  background-color: #b31e00;
+}
+
 ////////////////////////////////
 		//Django Toolbar//
 ////////////////////////////////
