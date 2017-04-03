@@ -8,16 +8,7 @@
   <div class="container">
     <h2>Edition de galerie</h2>
 
-    <!--
     {% crispy form %}
-    -->
-    <form action="" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <input type="submit" value="Save"/>
-
-      <input type="hidden" value="{{ view.gallery.id }}" name="gallery_id">
-    </form>
 
   </div>
 {% endblock content %}
