@@ -18,10 +18,11 @@ class GalleryNewForm(forms.Form):
     )
 
 
-class GalleryEditForm(forms.Form):
+class ImageForm(forms.Form):
     image_name = forms.CharField(max_length=50)
-    images = forms.FileField()  # widget=forms.ClearableFileInput(attrs={'multiple': True})
+    images = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
 
+    '''
     helper = FormHelper()
     helper.form_class = 'form-inline'
     helper.layout = Layout(
@@ -31,5 +32,5 @@ class GalleryEditForm(forms.Form):
             Submit('save_changes', 'Save changes', css_class="btn-primary"),
             HTML('<a class="btn btn-secondary" href={% url "galleries:index" %}>Cancel</a>')  # not sure about this
         ),
-    )
+    )'''
 

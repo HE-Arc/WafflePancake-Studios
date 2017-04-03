@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 
-from django.views.generic import DetailView, CreateView, ListView
+from django.views.generic import DetailView, CreateView, ListView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
+from django.urls import reverse
 
 from .models import Gallery, Image
 
-from django.contrib.auth.decorators import login_required
-
-from django.shortcuts import render, redirect
-
-from .forms import GalleryNewForm, GalleryEditForm
+from .forms import ImageForm
 
 
 class GalleryListView(LoginRequiredMixin, ListView):
@@ -23,19 +20,35 @@ class GalleryDetailView(LoginRequiredMixin, DetailView):
     model = Gallery
 
 
-
-
-class GalleryEditFormView(CreateView):
+class GalleryEditFormView(FormView):
+    '''
     model = Image
     fields = ['title', 'file']
-    # form_class = GalleryEditForm
+    '''
+    form_class = ImageForm
+    template_name = 'galleries/image_form.html'
+    success_url = '/galleries/'
+
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        name = request.FILES.getlist('image_name')
+        files = request.FILES.getlist('images')
+        if form.is_valid():
+            for f in files:
+                i = Image(title=name, gallery=self.gallery(), file=f)
+                i.save()
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
 
     def gallery(self):
         return Gallery.objects.get(pk=self.kwargs['pk'])
 
+'''
     def form_valid(self, form):
         form.instance.gallery_id = int(self.kwargs['pk'])
-        return super().form_valid(form)
+        return super().form_valid(form)'''
 
 
 class GalleryNewFormView(CreateView):
