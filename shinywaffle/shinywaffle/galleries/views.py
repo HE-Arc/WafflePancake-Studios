@@ -3,8 +3,6 @@ from __future__ import absolute_import, unicode_literals
 
 from django.views.generic import DetailView, CreateView, ListView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse
-from django.urls import reverse
 
 from .models import Gallery, Image
 
@@ -21,10 +19,6 @@ class GalleryDetailView(LoginRequiredMixin, DetailView):
 
 
 class GalleryEditFormView(FormView):
-    '''
-    model = Image
-    fields = ['title', 'file']
-    '''
     form_class = ImageForm
     template_name = 'galleries/image_form.html'
 
@@ -48,22 +42,8 @@ class GalleryEditFormView(FormView):
     def gallery(self):
         return Gallery.objects.get(pk=self.kwargs['pk'])
 
-'''
-    def form_valid(self, form):
-        form.instance.gallery_id = int(self.kwargs['pk'])
-        return super().form_valid(form)'''
-
 
 class GalleryNewFormView(FormView):
-    '''
-    model = Gallery
-    fields = ['title']
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-        '''
-
     form_class = GalleryForm
     template_name = 'galleries/gallery_form.html'
     success_url = '/galleries/'
@@ -80,19 +60,3 @@ class GalleryNewFormView(FormView):
         else:
             return self.form_invalid(form)
 
-
-# AJAX METHODS
-
-
-def delete_gallery(request):
-    id = request.POST.get('id')
-    Gallery.objects.get(pk=id).delete()
-    data = {'id': id, 'message': 'Gallery deleted correctly'}
-    return JsonResponse(data, status=200)
-
-
-def delete_image(request):
-    id = request.POST.get('id')
-    Image.objects.get(pk=id).delete()
-    data = {'id': id, 'message': 'Image deleted correctly'}
-    return JsonResponse(data, status=200)

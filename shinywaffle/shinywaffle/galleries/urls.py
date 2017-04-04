@@ -3,7 +3,7 @@ from __future__ import absolute_import, unicode_literals
 
 from django.conf.urls import url
 
-from . import views
+from . import views, ajax
 
 urlpatterns = [
     url(regex=r'^$', view=views.GalleryListView.as_view(),
@@ -18,6 +18,6 @@ urlpatterns = [
         view=views.GalleryEditFormView.as_view(),
         name='edit'),
 
-    url(regex=r'^images/delete/$', view=views.delete_image),
-    url(regex=r'^delete/$', view=views.delete_gallery),
+    url(regex=r'^images/delete/$', view=ajax.delete_image),
+    url(regex=r'^delete/$', view=ajax.delete_gallery),
 ]
