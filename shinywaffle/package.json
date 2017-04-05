@@ -2,8 +2,7 @@
   "name": "shinywaffle",
   "version": "0.1.0",
   "dependencies": {
-    "js-cookie": "^2.1.3",
-    "lightbox2": "^2.9.0"
+    "js-cookie": "^2.1.3"
   },
   "scripts": {
     "watch": "gulp watch"
