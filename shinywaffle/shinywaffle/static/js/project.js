@@ -26,10 +26,12 @@ $('.form-group').removeClass('row');
 ///////////////////////////////////////////
 
 
-
 ///////////////////////////////////////////
 //////////////////TOOLS////////////////////
 ///////////////////////////////////////////
+
+var csrftoken;
+var ajaxHeaders;
 
 const urls = {
     deleteImage: '/galleries/images/delete/',
@@ -95,7 +97,7 @@ function deleteGallery(event) {
 }
 
 function deleteObject(event, url) {
-    var [masterid, object] = getMaster(event.target.id, splitDelete);
+    var [masterId, object] = getMaster(event.target.id, splitDelete);
     var ajaxProcess = new AjaxProcess(object, {disabled: [event.target]});
     var id = splitDelete(event.target.id);
     var data = {id: id};
@@ -104,8 +106,8 @@ function deleteObject(event, url) {
     ajaxProcess.preprocess();
 
     ajaxDriver(url, method, data)
-        .done((data) => ajaxProcess.success(data))
-        .fail((data, error, details) => ajaxProcess.fail(data, error, details))
+        .then((data) => ajaxProcess.success(data))
+        .catch((data, error, details) => ajaxProcess.fail(data, error, details))
 }
 
 
@@ -151,6 +153,17 @@ class AjaxProcess {
 ///////////////////////////////////////////
 
 function ajaxDriver(url, method, data) {
+    /**
+    return fetch(url, {
+        method: method,
+        data: data,
+        dataType: 'json',
+        headers: {
+            "X-CSRFToken" : csrftoken
+        }
+    });
+     */
+
     return $.ajax({
         url: url,
         type: method,
@@ -160,7 +173,14 @@ function ajaxDriver(url, method, data) {
 }
 
 function ajaxSetup() {
-    var csrftoken = getCookie('csrftoken'); //Cookies.get('csrftoken');
+
+    /*
+
+    ajaxHeaders = new Headers();
+    ajaxHeaders.append('X-CSRFToken', csrftoken);
+    */
+
+    csrftoken =  getCookie('csrftoken'); //Cookies.get('csrftoken');
     $.ajaxSetup({
         beforeSend: function (xhr, settings) {
             if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
