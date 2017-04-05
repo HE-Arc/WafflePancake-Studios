@@ -14,7 +14,9 @@
           <h4 class="list-group-item-heading">
             <a href="{% url 'galleries:detail' pk=gallery.id %}">{{ gallery.title }}</a>
           </h4>
-          <img src="{{ gallery.image_set.all.first.file | thumbnail_url:'gallery-thumb' }}" alt="{{ gallery.image_set.all.first.title }}" />
+          <a href="{% url 'galleries:detail' pk=gallery.id %}">
+            <img src="{{ gallery.image_set.all.first.file | thumbnail_url:'gallery-thumb' }}" alt="{{ gallery.image_set.all.first.title }}" />
+          </a>
             {% if gallery.author.id == user.id or user.is_superuser %}
               <button id="{{ gallery.id }}_delete" class="btn btn-danger delete-button-gallery">
                 <span id="{{ gallery.id }}" aria-hidden="true" class="glyphicon glyphicon-trash delegate"></span>

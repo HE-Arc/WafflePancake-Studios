@@ -83,7 +83,9 @@ function closestClick(event) {
 
 function lightboxSetup() {
     lightbox.option({
-        fadeDuration: 150
+        fadeDuration: 195,
+        imageFadeDuration: 225,
+        wrapAround: true
     })
 }
 
