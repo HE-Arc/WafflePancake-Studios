@@ -5,6 +5,11 @@
 
 // Plugins
 var gulp = require('gulp'),
+      browserify = require('browserify'),
+      source = require('vinyl-source-stream'),
+      buffer = require('vinyl-buffer'),
+      sourcemaps = require('gulp-sourcemaps'),
+      tap = require('gulp-tap'),
       pjson = require('./package.json'),
       gutil = require('gulp-util'),
       sass = require('gulp-sass'),
@@ -60,8 +65,19 @@ gulp.task('styles', function() {
 gulp.task('scripts', function() {
   return gulp.src(paths.js + '/project.js')
     .pipe(plumber()) // Checks for errors
-    .pipe(uglify()) // Minifies the js
+    .pipe(tap(file => {
+      gutil.log('bundling ' + file.path)
+      file.contents = browserify(file.path, {debug: true})
+        .bundle()
+    }))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
+    // Uglify doesn't like those.
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment   
+    //.pipe(uglify()) // Minifies the js
+    .on('error', gutil.log)
     .pipe(rename({ suffix: '.min' }))
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.js));
 });
 

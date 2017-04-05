@@ -1,4 +1,7 @@
+"use strict";
 /* Project specific Javascript goes here. */
+
+require('whatwg-fetch')
 
 /*
  Formatting hack to get around crispy-forms unfortunate hardcoding
@@ -30,8 +33,7 @@ $('.form-group').removeClass('row');
 //////////////////TOOLS////////////////////
 ///////////////////////////////////////////
 
-var csrftoken;
-var ajaxHeaders;
+const ajaxHeaders = new Headers()
 
 const urls = {
     deleteImage: '/galleries/images/delete/',
@@ -114,7 +116,14 @@ function deleteObject(event, url) {
     ajaxProcess.preprocess();
 
     ajaxDriver(url, method, data)
-        .then((data) => ajaxProcess.success(data))
+        .then(response => {
+            if (response.status === 200) {
+                return response.json()
+            } else {
+                throw "200 expected, got " + response.status
+            }
+        })
+        .then(data => ajaxProcess.success(data))
         .catch((data, error, details) => ajaxProcess.fail(data, error, details))
 }
 
@@ -161,41 +170,22 @@ class AjaxProcess {
 ///////////////////////////////////////////
 
 function ajaxDriver(url, method, data) {
-    /**
+    var formData = new FormData()
+    for(var k in data) {
+        if (data.hasOwnProperty(k)) {
+            formData.append(k, data[k])
+        }
+    }
     return fetch(url, {
         method: method,
-        data: data,
-        dataType: 'json',
-        headers: {
-            "X-CSRFToken" : csrftoken
-        }
+        credentials: 'same-origin',
+        body: formData,
+        headers: ajaxHeaders
     });
-     */
-
-    return $.ajax({
-        url: url,
-        type: method,
-        data: data,
-        dataType: 'json'
-    })
 }
 
 function ajaxSetup() {
-
-    /*
-
-    ajaxHeaders = new Headers();
-    ajaxHeaders.append('X-CSRFToken', csrftoken);
-    */
-
-    csrftoken =  getCookie('csrftoken'); //Cookies.get('csrftoken');
-    $.ajaxSetup({
-        beforeSend: function (xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        }
-    });
+    ajaxHeaders.append('X-CSRFToken', getCookie('csrftoken'))
 }
 
 function csrfSafeMethod(method) {
