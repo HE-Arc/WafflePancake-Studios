@@ -4,7 +4,7 @@ from __future__ import absolute_import, unicode_literals
 from django.conf.urls import url
 
 from . import views
-from friendship.views import view_friends, friendship_add_friend
+from friendship.views import view_friends
 
 urlpatterns = [
     url(
@@ -19,24 +19,22 @@ urlpatterns = [
     ),
     url(
         regex=r'^(?P<username>[\w.@+-]+)/$',
-        view=views.UserDetailView.as_view(),
+        view=views.user_detail,
         name='detail'
+    ),
+    url(
+        regex=r'^(?P<to_username>[\w.@+-]+)/addfriend/$',
+        view=views.user_addfriend,
+        name='addfriend'
+    ),
+    url(
+        regex=r'^(?P<username>[\w.@+-]+)/friends/$',
+        view=views.user_friends,
+        name='friendlist'
     ),
     url(
         regex=r'^~update/$',
         view=views.UserUpdateView.as_view(),
         name='update'
-    ),
-    url(
-        regex=r'^(?P<username>[\w-]+)/friendlist/$',
-        view=views.user_search_friend,
-        kwargs={'template_name' : 'users/user_friendlist.html'},
-        name='friendlist'
-    ),
-    url(
-        regex=r'^(?P<to_username>[\w-]+)/addfriend/$',
-        view=friendship_add_friend,
-        kwargs={'template_name' : 'users/user_friendadd.html'},
-        name='addfriend'
     ),
 ]
