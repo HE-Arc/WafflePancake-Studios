@@ -6,12 +6,14 @@
 {% block content %}
 <div class="container">
   <h2>Friends User's</h2>
-
   <div class="list-group">
-     <h3>
     {% get_by_name friendship_context_object_name as var %}
     {% friends var %}
-    </h3>
+    <form method="post">
+    {% csrf_token %}
+    <input type="text" name="to_username" value="" />
+    <input type="submit" value="add user" />
+    </form>
   </div>
 </div>
 {% endblock content %}
