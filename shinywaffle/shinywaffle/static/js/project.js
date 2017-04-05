@@ -64,6 +64,7 @@ function switchClass(object, oldClass, newClass) {
 ///////////////////////////////////////////
 
 $(function () {
+    lightboxSetup();
     ajaxSetup();
     addEventListeners();
 });
@@ -80,6 +81,11 @@ function closestClick(event) {
     event.stopPropagation();
 }
 
+function lightboxSetup() {
+    lightbox.option({
+        fadeDuration: 150
+    })
+}
 
 ///////////////////////////////////////////
 //////////////////DELETE///////////////////
