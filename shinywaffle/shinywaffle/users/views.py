@@ -81,7 +81,7 @@ def user_addfriend(request, to_username):
         except AlreadyExistsError as e:
             messages.add_message(request, messages.ERROR, "%s" % e)
 
-        return redirect('detail', {'to_username': to_username})
+        return redirect('users:detail', username=to_username)
 
 @login_required
 def user_detail(request, username, template_name='users/user_detail.html'):
