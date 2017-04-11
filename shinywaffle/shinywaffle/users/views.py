@@ -87,7 +87,8 @@ def user_addfriend(request, to_username):
 def user_detail(request, username, template_name='users/user_detail.html'):
     model = User
 
-    friendship_requests = FriendshipRequest.objects.filter(rejected__isnull=True)
+    to_user = get_object_or_404(User, username=username)
+    friendship_requests = FriendshipRequest.objects.filter(rejected__isnull=True,to_user=to_user.id)
     user = get_object_or_404(model, username=username)
     followers = Follow.objects.followers(user)
     return render(request, template_name, {'requests': friendship_requests, 'to_user': user,
