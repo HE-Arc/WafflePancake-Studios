@@ -34,7 +34,7 @@ import {setup} from './ajax'
 
 $(() => {
     lightboxSetup();
-    ajax.setup();
+    setup();
     addEventListeners();
 });
 
