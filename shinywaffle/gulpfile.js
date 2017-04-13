@@ -73,7 +73,7 @@ gulp.task('scripts', function() {
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
     // Uglify doesn't like those.
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment   
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
     //.pipe(uglify()) // Minifies the js
     .on('error', gutil.log)
     .pipe(rename({ suffix: '.min' }))
@@ -120,3 +120,4 @@ gulp.task('watch', ['default'], function() {
   gulp.watch(paths.images + '/*', ['imgCompression']);
   gulp.watch(paths.templates + '/**/*.html').on("change", reload);
 });
+

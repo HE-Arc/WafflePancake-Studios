@@ -17,7 +17,7 @@ export function HTTPDefault(response) {
 }
 
 function success(response) {
-    return response.json;
+    return response.json();
 }
 
 

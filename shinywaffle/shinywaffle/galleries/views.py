@@ -30,7 +30,6 @@ class GalleryEditFormView(FormView):
         form = self.get_form(form_class)
         name = request.POST.get('image_name')
         files = request.FILES.getlist('images')
-        print(name)
         if form.is_valid():
             for f in files:
                 i = Image(title=name, gallery=self.gallery(), file=f)
@@ -52,7 +51,6 @@ class GalleryNewFormView(FormView):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         name = request.POST.get('gallery_name')
-        print(name)
         if form.is_valid():
             g = Gallery(title=name, author=self.request.user)
             g.save()
