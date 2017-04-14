@@ -68,13 +68,12 @@ gulp.task('scripts', function() {
     .pipe(tap(file => {
       gutil.log('bundling ' + file.path)
       file.contents = browserify(file.path, {debug: true})
-        .bundle()
+          .transform('babelify', {presets: ["es2015", "es2016"]})
+          .bundle()
     }))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
-    // Uglify doesn't like those.
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
-    //.pipe(uglify()) // Minifies the js
+    .pipe(uglify()) // Minifies the js
     .on('error', gutil.log)
     .pipe(rename({ suffix: '.min' }))
     .pipe(sourcemaps.write('./'))

@@ -3,7 +3,7 @@
  */
 
 
-import * as tools from 'tools'
+import * as tools from './tools'
 
 
 const ajaxHeaders = new Headers();

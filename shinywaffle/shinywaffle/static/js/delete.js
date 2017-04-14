@@ -3,7 +3,7 @@
  */
 
 
-import Process, * as ajax from 'ajax';
+import Process, * as ajax from './ajax';
 
 
 const urls = {

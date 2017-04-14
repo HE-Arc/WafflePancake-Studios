@@ -1,7 +1,7 @@
 "use strict";
 /* Project specific Javascript goes here. */
 
-require('whatwg-fetch')
+import 'whatwg-fetch'
 
 /*
  Formatting hack to get around crispy-forms unfortunate hardcoding
@@ -28,10 +28,11 @@ $('.form-group').removeClass('row');
 ///////////////////////////////////////////
 ///////////////////////////////////////////
 
-import * as del from 'delete'
-import lightboxSetup from 'lightbox'
+import * as del from './delete'
+import lightboxSetup from './lightbox'
+import {setup} from './ajax'
 
-$(function () {
+$(() => {
     lightboxSetup();
     ajax.setup();
     addEventListeners();

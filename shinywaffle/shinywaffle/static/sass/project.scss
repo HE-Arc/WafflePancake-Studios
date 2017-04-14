@@ -46,9 +46,11 @@ $nav-transition-time: 430ms;
 .navbar {
   border-radius: 0;
 }
+
 .navbar-fixed-side-left {
   left: 0;
 }
+
 .navbar-fixed-side {
   z-index: 1000;
   min-height: 5px;
@@ -57,21 +59,19 @@ $nav-transition-time: 430ms;
   border: 0 solid transparent;
   padding: 0;
 }
+
 .navbar-fixed-side .nav > li > a {
   height: 100%;
   width: 100%;
 }
+
 .navbar-fixed-side .navbar-nav {
   margin: 0;
 }
+
 .navbar-fixed-side .navbar-nav > li {
   padding: 0;
   display: inline-block;
-  transition: all $nav-transition-time;
-}
-.navbar-fixed-side .navbar-nav > li:hover {
-  margin-left: -25%;
-  width: 125%;
   transition: all $nav-transition-time;
 }
 
@@ -79,16 +79,21 @@ $nav-transition-time: 430ms;
   line-height: 50px;
   transition: all $nav-transition-time;
 }
-.navbar-fixed-side .navbar-nav > li > a:hover {
-  padding-left: 30%;
-  width: 100%;
-  transition: all $nav-transition-time;
-}
 
+@media screen and (min-width: 768px) {
 
-.navbar-fixed-side .container {
-  width: 100%;
-  padding: 0;
+  .navbar-fixed-side .navbar-nav > li:hover {
+    margin-left: -25%;
+    width: 125%;
+    transition: all $nav-transition-time;
+  }
+
+  .navbar-fixed-side .navbar-nav > li > a:hover {
+    padding-left: 30%;
+    width: 100%;
+    transition: all $nav-transition-time;
+  }
+
 }
 
 .underline {
@@ -97,6 +102,12 @@ $nav-transition-time: 430ms;
   background-color: #CCCCCC;
   border: 0 solid transparent;
 }
+
+.navbar-fixed-side .container {
+  width: 100%;
+  padding: 0;
+}
+
 
 
 ////////////////////////////////
