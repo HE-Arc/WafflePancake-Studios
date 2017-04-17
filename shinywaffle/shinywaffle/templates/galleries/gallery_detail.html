@@ -8,6 +8,7 @@
     <div class="row">
       <div class="col-sm-12">
         <h2>{{ object.title }}</h2>
+    <a href="{% url 'users:detail' object.author %}">{{ object.author }}</a>
         <ul>
           {% for image in object.image_set.all %}
             <li><img alt="{{ image.title }}" src="{{ image.file.url }}" width="100%"/></li>
@@ -21,4 +22,3 @@
     </div>
   </div>
 {% endblock content %}
-
