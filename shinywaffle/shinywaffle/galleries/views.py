@@ -1,13 +1,18 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 
-from django.views.generic import DetailView, ListView, RedirectView, UpdateView
+from django.views.generic import DetailView, CreateView, ListView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
+<<<<<<< HEAD
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from .models import Gallery
+=======
 
-from django.contrib.auth.decorators import login_required
+from .models import Gallery, Image
+>>>>>>> origin/friend-users-network
+
+from .forms import GalleryForm, ImageForm
 
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -31,26 +36,42 @@ def gallery_userlist_view(request, username):
     galleries = Gallery.objects.filter(author_id=users.id)
     return render(request, 'galleries/gallery_list.html', {'galleries_list': galleries})
 
-@login_required
-def gallery_new_form_view(request):
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = GalleryNewForm(request.POST)
-        # check whether it's valid:
+class GalleryEditFormView(FormView):
+    form_class = ImageForm
+    template_name = 'galleries/image_form.html'
+
+    def get_success_url(self):
+        return '/galleries/{0}/'.format(self.kwargs['pk'])
+
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        name = request.POST.get('image_name')
+        files = request.FILES.getlist('images')
         if form.is_valid():
-            # process the data in form.cleaned_data as required
-            gallery = Gallery(title=request.POST.get('gallery_name'), author_id=request.user.id)
-            gallery.save()
-            # redirect to a new URL:
-            return redirect('galleries:index')
+            for f in files:
+                i = Image(title=name, gallery=self.gallery(), file=f)
+                i.save()
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
 
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = GalleryNewForm()
-    return render(request, 'galleries/gallery_new_form.html', {'form': form})
+    def gallery(self):
+        return Gallery.objects.get(pk=self.kwargs['pk'])
 
 
-@login_required
-def gallery_edit_form_view(request, pk):
-    return render(request, 'galleries/gallery_edit_form.html', {id: pk})
+class GalleryNewFormView(FormView):
+    form_class = GalleryForm
+    template_name = 'galleries/gallery_form.html'
+    success_url = '/galleries/'
+
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        name = request.POST.get('gallery_name')
+        if form.is_valid():
+            g = Gallery(title=name, author=self.request.user)
+            g.save()
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
