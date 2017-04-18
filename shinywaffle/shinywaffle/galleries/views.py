@@ -3,14 +3,10 @@ from __future__ import absolute_import, unicode_literals
 
 from django.views.generic import DetailView, CreateView, ListView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-<<<<<<< HEAD
+
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from .models import Gallery
-=======
-
 from .models import Gallery, Image
->>>>>>> origin/friend-users-network
 
 from .forms import GalleryForm, ImageForm
 
