@@ -16,7 +16,7 @@
           <div class="list-group-item-heading list-heading flex">
             <span class="list-title"><a href="{% url 'galleries:detail' pk=gallery.id %}">{{ gallery.title }}</a></span>
             <div class="mid-filler"></div>
-            {% if gallery.author.id == user.id or user.is_superuser %}
+            {% if gallery.author == user or user.is_superuser %}
               <button id="{{ gallery.id }}_update" class="btn btn-info pull-right">
                 <span id="{{ gallery.id }}_update-icon" aria-hidden="true" class="glyphicon glyphicon-pencil delegate"></span>
               </button>

@@ -20,7 +20,6 @@
           integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
 
     <!-- Your stuff: Third-party CSS libraries go here -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/css/lightbox.min.css" rel="stylesheet">
 
     <!-- This file stores project-specific CSS -->
     <link href="{% static 'css/project.css' %}" rel="stylesheet">
@@ -42,6 +41,13 @@
 
       <div class="collapse navbar-toggleable-xs" id="bs-navbar-collapse-1">
         <ul class="nav navbar-nav pull-xs-right">
+          <li class="nav-item">
+              <form method="post" action="{% url 'users:search' %}">
+                  {% csrf_token %}
+                  <input type="text" name="username"/>
+                  <input type="submit" value="search" />
+              </form>
+          </li>
           {% if request.user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'users:detail' request.user.username %}">{% trans "My Profile" %}</a>
@@ -63,33 +69,29 @@
   </nav>
 </div>
 
-<div id="whole" class="container">
+<div class="container">
     {% if request.user.is_authenticated %}
   <!-- Fixed navbar -->
   <div id="main-wrapper" class="row">
-    <div id="sidebar" class="container col-md-3 col-xs-12">
+    <div class="container col-md-3 col-xs-12">
       <div class="navbar navbar-default navbar-fixed-side navbar-fixed-side-left" role="navigation">
         <div class="container">
           <ul class="nav navbar-nav">
             <li class="col-xs-3 col-sm-3 col-md-12">
               <a class="nav-link hidden-xs-down" href="{% url 'home' %}">Favorites</a>
               <a class="nav-link hidden-sm-up" href="{% url 'home' %}"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></a>
-              <div class="underline"></div>
             </li>
             <li class="col-xs-3 col-sm-3 col-md-12">
               <a class="nav-link hidden-xs-down" href="{% url 'galleries:index' %}">Explore</a>
               <a class="nav-link hidden-sm-up" href="{% url 'galleries:index' %}"><span aria-hidden="true" class="glyphicon glyphicon-plane"></span></a>
-              <div class="underline"></div>
             </li>
             <li class="col-xs-3 col-sm-3 col-md-12">
-              <a class="nav-link hidden-xs-down" href="{% url 'galleries:index' %}">My Galleries</a>
-              <a class="nav-link hidden-sm-up" href="{% url 'galleries:index' %}"><span aria-hidden="true" class="glyphicon glyphicon-picture"></span></a>
-              <div class="underline"></div>
+              <a class="nav-link hidden-xs-down" href="{% url 'galleries:userlist' request.user.username %}">My Galleries</a>
+              <a class="nav-link hidden-sm-up" href="{% url 'galleries:userlist' request.user.username %}"><span aria-hidden="true" class="glyphicon glyphicon-picture"></span></a>
             </li>
             <li class="col-xs-3 col-sm-3 col-md-12">
               <a class="nav-link hidden-xs-down" href="{% url 'users:friendlist' request.user.username %}">Friends</a>
               <a class="nav-link hidden-sm-up" href="{% url 'users:friendlist' request.user.username %}"><span aria-hidden="true" class="glyphicon glyphicon-user"></span></a>
-              <div class="underline"></div>
             </li>
           </ul>
         </div>
@@ -129,13 +131,11 @@
           integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU"
           crossorigin="anonymous"></script>
 
-
   <!-- Your stuff: Third-party javascript libraries go here -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/js/lightbox.min.js"></script>
 
   <!-- place project specific Javascript in this file -->
 
-  <script src="{% static 'js/project.min.js' %}"></script>
+  <script src="{% static 'js/project.js' %}"></script>
 
 
 {% endblock javascript %}

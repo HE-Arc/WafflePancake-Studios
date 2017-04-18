@@ -28,13 +28,48 @@ urlpatterns = [
         name='addfriend'
     ),
     url(
+        regex=r'^(?P<to_username>[\w.@+-]+)/removefriend/$',
+        view=views.user_removefriend,
+        name='removefriend'
+    ),
+    url(
+        regex=r'^(?P<to_username>[\w.@+-]+)/addfollow/$',
+        view=views.user_addfollow,
+        name='addfollow'
+    ),
+    url(
+        regex=r'^(?P<to_username>[\w.@+-]+)/removefollow/$',
+        view=views.user_removefollow,
+        name='removefollow'
+    ),
+    url(
         regex=r'^(?P<username>[\w.@+-]+)/friends/$',
         view=views.user_friends,
         name='friendlist'
     ),
     url(
+        regex=r'^~search/$',
+        view=views.search,
+        name='search'
+    ),
+    url(
         regex=r'^~update/$',
         view=views.UserUpdateView.as_view(),
         name='update'
+    ),
+    url(
+        regex=r'^request/accept/(?P<friendship_request_id>\d+)/$',
+        view=views.request_accept,
+        name='requestaccept',
+    ),
+    url(
+        regex=r'^request/cancel/(?P<friendship_request_id>\d+)/$',
+        view=views.request_cancel,
+        name='requestcancel',
+    ),
+    url(
+        regex=r'^request/(?P<friendship_request_id>\d+)/$',
+        view=views.request_detail,
+        name='requestdetail',
     ),
 ]

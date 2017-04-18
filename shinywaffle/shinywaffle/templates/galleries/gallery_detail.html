@@ -7,7 +7,8 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h2>{{ gallery.title }}</h2>
+        <h2>{{ object.title }}</h2>
+    <a href="{% url 'users:detail' object.author %}">{{ object.author }}</a>
         <ul>
           {% for image in gallery.image_set.all %}
             <li id="{{ image.id }}_master">
@@ -30,4 +31,3 @@
     </div>
   </div>
 {% endblock content %}
-
