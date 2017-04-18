@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 from __future__ import absolute_import, unicode_literals
 
 import environ
+import os
 
 ROOT_DIR = environ.Path(__file__) - 3  # (shinywaffle/config/settings/common.py - 3 = shinywaffle/)
 APPS_DIR = ROOT_DIR.path('shinywaffle')
@@ -108,17 +109,19 @@ MANAGERS = ADMINS
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    # 'default': env.db('DATABASE_URL', default='postgres://localhost/shinywaffle'),
-	'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': env('POSTGRES_NAME'),                      # Or path to database file if using sqlite3.
-        'USER': env('POSTGRES_USER'),                      # Not used with sqlite3.
-        'PASSWORD': env('POSTGRES_PASSWORD'),                  # Not used with sqlite3.
-        'HOST': env('POSTGRES_HOST'),                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': env('POSTGRES_PORT'),                      # Set to empty string for default. Not used with sqlite3.
-    }
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'NAME': os.environ.get('GROUPNAME'),
+    'USER': os.environ.get('GROUPNAME', 'root'),
+    'PASSWORD': os.environ.get('PASSWORD', ''),
+    'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
+    'PORT': os.environ.get('POSTGRES_PORT', '3306'),
+#    'OPTIONS': {
+#      'charset': 'utf8mb4'
+#    }
+  }
 }
-DATABASES['default']['ATOMIC_REQUESTS'] = True
+#DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 
 # GENERAL CONFIGURATION
