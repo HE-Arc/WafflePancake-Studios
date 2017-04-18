@@ -37,7 +37,7 @@ class GalleryEditFormView(FormView):
     template_name = 'galleries/image_form.html'
 
     def get_success_url(self):
-        return '/galleries/{0}/'.format(self.kwargs['pk'])
+        return '/galleries/display/{0}/'.format(self.kwargs['pk'])
 
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
