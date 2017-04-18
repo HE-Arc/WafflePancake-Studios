@@ -6,7 +6,12 @@ from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 from django.conf import settings
 from django.http import HttpResponseRedirect
 
-from django.contrib.auth.models import User
+try:
+    from django.contrib.auth import get_user_model
+    User = get_user_model()
+except ImportError:
+    from django.contrib.auth.models import User
+
 from friendship.models import Friend, Follow
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -16,7 +21,6 @@ from django.contrib import messages
 from friendship.views import view_friends
 from friendship.models import Friend, Follow, FriendshipRequest
 
-from .models import User
 
 
 get_friendship_context_object_name = lambda: getattr(settings, 'FRIENDSHIP_CONTEXT_OBJECT_NAME', 'user')
@@ -138,7 +142,40 @@ def search(request):
 
 
 @login_required
-def user_request(request, friendship_request_id, template_name='friendship/friend/request.html'):
+def request_detail(request, friendship_request_id, template_name='users/user_request.html'):
+    """ View a particular friendship request """
     f_request = get_object_or_404(FriendshipRequest, id=friendship_request_id)
 
     return render(request, template_name, {'friendship_request': f_request})
+
+@login_required
+def request_accept(request, friendship_request_id):
+    if request.method == 'POST':
+        f_request = get_object_or_404(
+            FriendshipRequest,
+            id=friendship_request_id)
+        f_request.accept()
+
+    return redirect('home')
+
+@login_required
+def request_reject(request, friendship_request_id):
+    """ Reject a friendship request """
+    if request.method == 'POST':
+        f_request = get_object_or_404(
+            FriendshipRequest,
+            id=friendship_request_id)
+        f_request.reject()
+
+    return redirect('home')
+
+@login_required
+def request_cancel(request, friendship_request_id):
+    """ Reject a friendship request """
+    if request.method == 'POST':
+        f_request = get_object_or_404(
+            FriendshipRequest,
+            pk=friendship_request_id)
+        f_request.cancel()
+
+    return redirect('home')

@@ -57,4 +57,19 @@ urlpatterns = [
         view=views.UserUpdateView.as_view(),
         name='update'
     ),
+    url(
+        regex=r'^request/accept/(?P<friendship_request_id>\d+)/$',
+        view=views.request_accept,
+        name='requestaccept',
+    ),
+    url(
+        regex=r'^request/cancel/(?P<friendship_request_id>\d+)/$',
+        view=views.request_cancel,
+        name='requestcancel',
+    ),
+    url(
+        regex=r'^request/(?P<friendship_request_id>\d+)/$',
+        view=views.request_detail,
+        name='requestdetail',
+    ),
 ]
