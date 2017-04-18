@@ -45,7 +45,6 @@
         <h2>remove friend</h2>
         <form method="post" action="{% url 'users:removefriend' to_user.username %}">
         {% csrf_token %}
-        <input type="hidden" name="username" value="{{ to_user.username }}" />
         <input type="submit" value="remove {{ to_user.username }} as a friend" />
         </form>
     {% endif %}
@@ -61,11 +60,15 @@
         <h2>stop follow</h2>
         <form method="post" action="{% url 'users:removefollow' to_user.username %}">
         {% csrf_token %}
-        <input type="hidden" name="username" value="{{ to_user.username }}" />
         <input type="submit" value="stop following {{ to_user.username }} " />
         </form>
     {% endif %}
   {% endif %}
+  <h2>Gallery</h2>
+  <form method="post" action="{% url 'galleries:userlist' to_user.username %}">
+  {% csrf_token %}
+  <input type="submit" value="Explore Gallery {{ to_user.username }} " />
+  </form>
 
   <h2>followers</h2>
     <ul>
