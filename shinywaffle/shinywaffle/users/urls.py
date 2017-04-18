@@ -28,9 +28,19 @@ urlpatterns = [
         name='addfriend'
     ),
     url(
+        regex=r'^(?P<to_username>[\w.@+-]+)/addfollow/$',
+        view=views.user_addfollow,
+        name='addfollow'
+    ),
+    url(
         regex=r'^(?P<username>[\w.@+-]+)/friends/$',
         view=views.user_friends,
         name='friendlist'
+    ),
+    url(
+        regex=r'^~search/$',
+        view=views.search,
+        name='search'
     ),
     url(
         regex=r'^~update/$',
