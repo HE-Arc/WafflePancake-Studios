@@ -1,4 +1,7 @@
+"use strict";
 /* Project specific Javascript goes here. */
+
+import 'whatwg-fetch'
 
 /*
  Formatting hack to get around crispy-forms unfortunate hardcoding
@@ -25,51 +28,20 @@ $('.form-group').removeClass('row');
 ///////////////////////////////////////////
 ///////////////////////////////////////////
 
+import * as del from './delete'
+import lightboxSetup from './lightbox'
+import {setup} from './ajax'
 
-
-///////////////////////////////////////////
-//////////////////TOOLS////////////////////
-///////////////////////////////////////////
-
-const urls = {
-    deleteImage: '/galleries/images/delete/',
-    deleteGallery: '/galleries/delete/'
-};
-
-var splitDelete = strip('_delete');
-var splitUpdate = strip('_update');
-
-function strip(pattern) {
-    return function (id) {
-        return id.split(pattern)[0];
-    }
-}
-
-function getMaster(target, splitMethod) {
-    var id = splitMethod(target) + '_master';
-    var object = $('#' + id);
-    return [id, object];
-}
-
-function switchClass(object, oldClass, newClass) {
-    object.removeClass(oldClass);
-    object.addClass(newClass);
-    return object;
-}
-
-///////////////////////////////////////////
-//////////////////INIT/////////////////////
-///////////////////////////////////////////
-
-$(function () {
-    ajaxSetup();
+$(() => {
+    lightboxSetup();
+    setup();
     addEventListeners();
 });
 
 function addEventListeners() {
     $('body')
-        .on('click', '.delete-button-image', deleteImage)
-        .on('click', '.delete-button-gallery', deleteGallery)
+        .on('click', '.delete-button-image', del.image)
+        .on('click', '.delete-button-gallery', del.gallery)
         .on('click', '.delegate', closestClick)
 }
 
@@ -79,115 +51,4 @@ function closestClick(event) {
 }
 
 
-///////////////////////////////////////////
-//////////////////DELETE///////////////////
-///////////////////////////////////////////
 
-
-function deleteImage(event) {
-    var url = urls.deleteImage;
-    deleteObject(event, url);
-}
-
-function deleteGallery(event) {
-    var url = urls.deleteGallery;
-    deleteObject(event, url);
-}
-
-function deleteObject(event, url) {
-    var [masterid, object] = getMaster(event.target.id, splitDelete);
-    var ajaxProcess = new AjaxProcess(object, {disabled: [event.target]});
-    var id = splitDelete(event.target.id);
-    var data = {id: id};
-    var method = 'POST';
-
-    ajaxProcess.preprocess();
-
-    ajaxDriver(url, method, data)
-        .done((data) => ajaxProcess.success(data))
-        .fail((data, error, details) => ajaxProcess.fail(data, error, details))
-}
-
-
-class AjaxProcess {
-    constructor(object, args = {}) {
-        var p = this.m_preprocess;
-        var s = this.m_success;
-        var f = this.m_fail;
-
-        var {
-            preprocess = p,
-            success = s,
-            fail = f
-            } = args;
-
-        this.master = object;
-        this.preprocess = preprocess;
-        this.success = success;
-        this.fail = fail;
-    }
-
-    m_preprocess() {
-        switchClass(this.master, 'available', 'deleting');
-        this.master.find('*').addClass('disabled');
-    }
-
-    m_success(data) {
-        this.master.slideUp();
-    }
-
-    m_fail(data, error, details) {
-        console.log(data.responseText);
-        console.log(data, error, details);
-        switchClass(this.master, 'deleting', 'delete-failed');
-        window.setTimeout(() => switchClass(this.master, 'delete-failed', 'available'), 1000);
-        this.master.find('*').removeClass('disabled');
-    }
-}
-
-
-///////////////////////////////////////////
-//////////////////AJAX/////////////////////
-///////////////////////////////////////////
-
-function ajaxDriver(url, method, data) {
-    return $.ajax({
-        url: url,
-        type: method,
-        data: data,
-        dataType: 'json'
-    })
-}
-
-function ajaxSetup() {
-    var csrftoken = getCookie('csrftoken'); //Cookies.get('csrftoken');
-    $.ajaxSetup({
-        beforeSend: function (xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        }
-    });
-}
-
-function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-
-//temporary
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}

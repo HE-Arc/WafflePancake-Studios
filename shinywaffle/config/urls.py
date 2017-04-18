@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^galleries/',
         include('shinywaffle.galleries.urls', namespace='galleries')),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^friendship/', include('friendship.urls')),
 
     # Your stuff: custom urls includes go here
 ] + static(

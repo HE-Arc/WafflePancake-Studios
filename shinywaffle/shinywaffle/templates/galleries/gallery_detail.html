@@ -11,7 +11,9 @@
         <ul>
           {% for image in gallery.image_set.all %}
             <li id="{{ image.id }}_master">
-              <img alt="{{ image.title }}" src="{{ image.file.url }}" width="100%"/>
+              <a href="{{ image.file.url }}" data-lightbox="{{ gallery.title }}" data-title="{{ image.title }}">
+                <img alt="{{ image.title }}" src="{{ image.file.url }}" width="100%"/>
+              </a>
               {% if gallery.author.id == user.id or user.is_superuser %}
               <button id="{{ image.id }}_delete" class="btn btn-danger delete-button-image">
                 <span aria-hidden="true" class="glyphicon glyphicon-trash delegate"></span>
