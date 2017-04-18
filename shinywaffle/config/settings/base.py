@@ -39,13 +39,15 @@ DJANGO_APPS = [
 
     # Admin
     'django.contrib.admin',
+
 ]
 THIRD_PARTY_APPS = [
     'crispy_forms',  # Form layouts
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
-    'friendship'
+    'friendship',
+    'easy_thumbnails', # Thumbnails
 ]
 
 # Apps specific for this project go here.
@@ -192,7 +194,7 @@ STATIC_URL = '/static/'
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = [
-    str(APPS_DIR.path('static')),
+    str(APPS_DIR.path('static'))
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
@@ -267,3 +269,10 @@ ADMIN_URL = r'^admin/'
 
 # Your common stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'gallery-thumb': {'size': (225, 225), 'crop': True},
+        'image-thumb': {'size': (50, 50), 'crop': True},
+    },
+}

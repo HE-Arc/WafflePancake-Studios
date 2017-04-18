@@ -5,6 +5,11 @@
 
 // Plugins
 var gulp = require('gulp'),
+      browserify = require('browserify'),
+      source = require('vinyl-source-stream'),
+      buffer = require('vinyl-buffer'),
+      sourcemaps = require('gulp-sourcemaps'),
+      tap = require('gulp-tap'),
       pjson = require('./package.json'),
       gutil = require('gulp-util'),
       sass = require('gulp-sass'),
@@ -60,8 +65,18 @@ gulp.task('styles', function() {
 gulp.task('scripts', function() {
   return gulp.src(paths.js + '/project.js')
     .pipe(plumber()) // Checks for errors
+    .pipe(tap(file => {
+      gutil.log('bundling ' + file.path)
+      file.contents = browserify(file.path, {debug: true})
+          .transform('babelify', {presets: ["es2015", "es2016"]})
+          .bundle()
+    }))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(uglify()) // Minifies the js
+    .on('error', gutil.log)
     .pipe(rename({ suffix: '.min' }))
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(paths.js));
 });
 
@@ -104,3 +119,4 @@ gulp.task('watch', ['default'], function() {
   gulp.watch(paths.images + '/*', ['imgCompression']);
   gulp.watch(paths.templates + '/**/*.html').on("change", reload);
 });
+
