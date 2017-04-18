@@ -15,20 +15,26 @@
             <a href="{% url 'galleries:detail' pk=gallery.id %}">{{ gallery.title }}</a>
           </h4>
           <a href="{% url 'users:detail' gallery.author %}">{{ gallery.author }}</a>
+          {% if gallery.author.id == user.id or user.is_superuser %}
+            <button id="{{ gallery.id }}_delete" class="btn btn-danger delete-button-gallery">
+              <span id="{{ gallery.id }}" aria-hidden="true" class="glyphicon glyphicon-trash delegate"></span>
+            </button>
+          {% endif %}
           <a href="{% url 'galleries:detail' pk=gallery.id %}">
-            <img src="{{ gallery.image_set.all.first.file | thumbnail_url:'gallery-thumb' }}" alt="{{ gallery.image_set.all.first.title }}" />
+            <img src="{{ gallery.image_set.all.first.file | thumbnail_url:'gallery-thumb' }}"
+                 alt="{{ gallery.image_set.all.first.title }}"/>
+            {% for i in gallery.image_set.all|slice:"1:4" %}
+              <img src="{{ i.file | thumbnail_url:'gallery-secondary-thumb' }}"
+                   alt="{{ i.title }}"/>
+            {% endfor %}
           </a>
-            {% if gallery.author.id == user.id or user.is_superuser %}
-              <button id="{{ gallery.id }}_delete" class="btn btn-danger delete-button-gallery">
-                <span id="{{ gallery.id }}" aria-hidden="true" class="glyphicon glyphicon-trash delegate"></span>
-              </button>
-            {%  endif %}
         </div>
       {% endfor %}
     </div>
 
     <div class="container">
-      <a class="gallery-add-button" href="{% url 'galleries:new' %}"><span aria-hidden="true" class="glyphicon glyphicon-plus"></span></a>
+      <a class="gallery-add-button" href="{% url 'galleries:new' %}"><span aria-hidden="true"
+                                                                           class="glyphicon glyphicon-plus"></span></a>
     </div>
   </div>
 {% endblock content %}
