@@ -1,7 +1,8 @@
 {% extends "base.html" %}
+{% load friendshiptags %}
 {% load static %}
 
-{% block title %}User: {{ object.username }}{% endblock %}
+{% block title %}User: {{ to_user.username }}{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -9,28 +10,64 @@
   <div class="row">
     <div class="col-sm-12">
 
-      <h2>{{ object.username }}</h2>
-      {% if object.name %}
-        <p>{{ object.name }}</p>
+      <h2>{{ to_user.username }}</h2>
+      {% if to_user.name %}
+        <p>{{ to_user.name }}</p>
       {% endif %}
     </div>
   </div>
 
-{% if object == request.user %}
 <!-- Action buttons -->
 <div class="row">
 
   <div class="col-sm-12">
+  {% if to_user == request.user %}
     <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
     <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
     <!-- Your Stuff: Custom user template urls -->
+    <h2>Your request</h2>
+    <ul>
+    {% for friendship_request in requests %}
+        <li>{{ friendship_request.from_user }} to {{ friendship_request.to_user }} <a href="{% url 'friendship_requests_detail' friendship_request.id %}">view</a></li>
+    {% empty %}
+    <div>no requests :(</div>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <h2>add friend</h2>
+    {% if not to_user == request.user %}
+        {% if errors %}<p>{{ errors|join:", " }}</p>{% endif %}
+        <form method="post" action="{% url 'users:addfriend' to_user.username %}">
+        {% csrf_token %}
+        <input type="submit" value="add {{ to_user.username }} as a friend" />
+        </form>
+    {% endif %}
+
+    {% if not to_user == request.user %}
+        <h2>follow</h2>
+        {% if errors %}<p>{{ errors|join:", " }}</p>{% endif %}
+        <form method="post" action="{% url 'users:addfriend' to_user.username %}">
+        {% csrf_token %}
+        <input type="submit" value="start following {{ to_user.username }}" />
+        </form>
+    {% else %}
+        <h2>stop follow</h2>
+        <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="username" value="{{ to_user.username }}" />
+        <input type="submit" value="remove {{ to_user.username }} as a friend" />
+        </form>
+    {% endif %}
+  {% endif %}
+
+  <h2>followers</h2>
+    {% get_by_name friendship_context_object_name as var %}
+    {% followers var %}
   </div>
 
 </div>
 <!-- End Action buttons -->
-{% endif %}
 
 
 </div>
 {% endblock content %}
-

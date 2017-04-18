@@ -46,6 +46,7 @@ THIRD_PARTY_APPS = [
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
+    'friendship',
     'easy_thumbnails', # Thumbnails
 ]
 

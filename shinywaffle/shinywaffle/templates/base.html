@@ -86,9 +86,9 @@
               <a class="nav-link hidden-sm-up" href="{% url 'galleries:index' %}"><span aria-hidden="true" class="glyphicon glyphicon-picture"></span></a>
               <div class="underline"></div>
             </li>
-            <li class="col-xs-3 col-sm-3 col-md-12">
-              <a class="nav-link hidden-xs-down" href="{% url 'home' %}">Friends</a>
-              <a class="nav-link hidden-sm-up" href="{% url 'home' %}"><span aria-hidden="true" class="glyphicon glyphicon-user"></span></a>
+            <li class="col-xs-3 col-sm-3 col-smd-12">
+              <a class="nav-link hidden-xs-down" href="{% url 'users:friendlist' request.user.username %}">Friends</a>
+              <a class="nav-link hidden-sm-up" href="{% url 'users:friendlist' request.user.username %}"><span aria-hidden="true" class="glyphicon glyphicon-user"></span></a>
               <div class="underline"></div>
             </li>
           </ul>
@@ -142,4 +142,3 @@
 
 </body>
 </html>
-
