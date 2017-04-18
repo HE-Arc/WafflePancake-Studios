@@ -6,11 +6,11 @@ from django.conf.urls import url
 from . import views, ajax
 
 urlpatterns = [
-    url(regex=r'^$', view=views.GalleryListView.as_view(),
+    url(regex=r'^$', view=views.gallery_list_view,
         name='index'),
     url(regex=r'^(?P<username>[\w.@+-]+)/$', view=views.gallery_userlist_view,
         name='userlist'),
-    url(regex=r'^new/$', view=views.gallery_new_form_view,
+    url(regex=r'^new/$', view=views.GalleryNewFormView.as_view(),
         name='new'),
     # url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
     # url(
@@ -24,7 +24,6 @@ urlpatterns = [
     url(regex=r'^(?P<pk>\d+)/image/new/$',
         view=views.GalleryEditFormView.as_view(),
         name='edit'),
-
     url(regex=r'^images/delete/$', view=ajax.delete_image),
     url(regex=r'^delete/$', view=ajax.delete_gallery),
 ]

@@ -15,7 +15,7 @@
             <a href="{% url 'galleries:detail' pk=gallery.id %}">{{ gallery.title }}</a>
           </h4>
           <a href="{% url 'users:detail' gallery.author %}">{{ gallery.author }}</a>
-          {% if gallery.author.id == user.id or user.is_superuser %}
+          {% if gallery.author == user or user.is_superuser %}
             <button id="{{ gallery.id }}_delete" class="btn btn-danger delete-button-gallery">
               <span id="{{ gallery.id }}" aria-hidden="true" class="glyphicon glyphicon-trash delegate"></span>
             </button>
