@@ -3,20 +3,34 @@ from __future__ import absolute_import, unicode_literals
 
 from django.views.generic import DetailView, CreateView, ListView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
+from django.conf import settings
+from django.contrib.auth import get_user_model
 from .models import Gallery, Image
 
 from .forms import GalleryForm, ImageForm
 
+from django.shortcuts import render, get_object_or_404, redirect
 
-class GalleryListView(LoginRequiredMixin, ListView):
-    model = Gallery
-    template_name = "galleries/gallery_list.html"
+
+
+User = get_user_model()
+
+@login_required
+def gallery_list_view(request):
+    gallery_list = Gallery.objects.all()
+    return render(request, 'galleries/gallery_list.html', {'gallery_list': gallery_list})
 
 
 class GalleryDetailView(LoginRequiredMixin, DetailView):
     model = Gallery
 
+@login_required
+def gallery_userlist_view(request, username):
+    users = User.objects.get(username=username)
+    gallery_list = Gallery.objects.filter(author_id=users.id)
+    return render(request, 'galleries/gallery_list.html', {'gallery_list': gallery_list})
 
 class GalleryEditFormView(FormView):
     form_class = ImageForm
@@ -57,4 +71,3 @@ class GalleryNewFormView(FormView):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
-
