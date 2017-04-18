@@ -34,16 +34,23 @@
     {% endfor %}
     </ul>
   {% else %}
-    <h2>add friend</h2>
-    {% if not to_user == request.user %}
+    {% if not request.user in friends %}
+      <h2>add friend</h2>
         {% if errors %}<p>{{ errors|join:", " }}</p>{% endif %}
         <form method="post" action="{% url 'users:addfriend' to_user.username %}">
         {% csrf_token %}
         <input type="submit" value="add {{ to_user.username }} as a friend" />
         </form>
+    {% else %}
+        <h2>remove friend</h2>
+        <form method="post" action="{% url 'users:removefriend' to_user.username %}">
+        {% csrf_token %}
+        <input type="hidden" name="username" value="{{ to_user.username }}" />
+        <input type="submit" value="remove {{ to_user.username }} as a friend" />
+        </form>
     {% endif %}
 
-    {% if not to_user == request.user %}
+    {% if not request.user in followers %}
         <h2>follow</h2>
         {% if errors %}<p>{{ errors|join:", " }}</p>{% endif %}
         <form method="post" action="{% url 'users:addfollow' to_user.username %}">
@@ -52,17 +59,20 @@
         </form>
     {% else %}
         <h2>stop follow</h2>
-        <form method="post">
+        <form method="post" action="{% url 'users:removefollow' to_user.username %}">
         {% csrf_token %}
         <input type="hidden" name="username" value="{{ to_user.username }}" />
-        <input type="submit" value="remove {{ to_user.username }} as a friend" />
+        <input type="submit" value="stop following {{ to_user.username }} " />
         </form>
     {% endif %}
   {% endif %}
 
   <h2>followers</h2>
-    {% get_by_name friendship_context_object_name as var %}
-    {% followers var %}
+    <ul>
+      {% for f in followers %}
+      <li>{{ f.first_name }} {{ f.last_name }}</li>
+      {% endfor %}
+    </ul>
   </div>
 
 </div>

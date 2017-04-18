@@ -85,6 +85,19 @@ def user_addfriend(request, to_username):
         return redirect('users:detail', username=to_username)
 
 @login_required
+def user_removefriend(request, to_username):
+
+    if request.method == 'POST':
+        to_user = get_object_or_404(User, username=to_username)
+        from_user = request.user
+        try:
+            Friend.objects.remove_friend(from_user, to_user)
+        except AlreadyExistsError as e:
+            messages.add_message(request, messages.ERROR, "%s" % e)
+
+        return redirect('users:detail', username=to_username)
+
+@login_required
 def user_addfollow(request, to_username):
 
     if request.method == 'POST':
@@ -98,6 +111,16 @@ def user_addfollow(request, to_username):
         return redirect('users:detail', username=to_username)
 
 @login_required
+def user_removefollow(request, to_username):
+
+    if request.method == 'POST':
+        followee = User.objects.get(username=to_username)
+        follower = request.user
+        Follow.objects.remove_follower(follower, followee)
+
+        return redirect('users:detail', username=to_username)
+
+@login_required
 def user_detail(request, username, template_name='users/user_detail.html'):
     model = User
 
@@ -105,10 +128,8 @@ def user_detail(request, username, template_name='users/user_detail.html'):
     friendship_requests = FriendshipRequest.objects.filter(rejected__isnull=True,to_user=to_user.id)
     user = get_object_or_404(model, username=username)
     followers = Follow.objects.followers(user)
-    return render(request, template_name, {'requests': friendship_requests, 'to_user': user,
-        get_friendship_context_object_name(): user,
-        'friendship_context_object_name': get_friendship_context_object_name()
-        })
+    friends = Friend.objects.friends(user)
+    return render(request, template_name, {'requests': friendship_requests, 'to_user': user, 'followers': followers, 'friends': friends} )
 
 @login_required
 def search(request):
