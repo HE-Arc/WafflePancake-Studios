@@ -129,6 +129,20 @@ $nav-transition-time: 430ms;
 
 
 
+.text-shade {
+  background: linear-gradient(rgba(54, 25, 25, .8), rgba(54, 25, 25, 0));
+  padding-bottom: 40px;
+}
+
+#about {
+  color: honeydew;
+  background-size: cover;
+  background-image: url("../images/SpaceCat.jpg");
+  height: 80vh;
+}
+
+
+
 .available {
   opacity: 1;
   transition: 5s;
