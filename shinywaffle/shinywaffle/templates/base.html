@@ -41,6 +41,13 @@
 
       <div class="collapse navbar-toggleable-xs" id="bs-navbar-collapse-1">
         <ul class="nav navbar-nav pull-xs-right">
+          <li class="nav-item">
+              <form method="post" action="{% url 'users:search' %}">
+                  {% csrf_token %}
+                  <input type="text" name="username"/>
+                  <input type="submit" value="search" />
+              </form>
+          </li>
           {% if request.user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'users:detail' request.user.username %}">{% trans "My Profile" %}</a>
@@ -79,8 +86,8 @@
               <a class="nav-link hidden-sm-up" href="{% url 'galleries:index' %}"><span aria-hidden="true" class="glyphicon glyphicon-plane"></span></a>
             </li>
             <li class="col-xs-3 col-sm-3 col-md-12">
-              <a class="nav-link hidden-xs-down" href="{% url 'galleries:index' %}">My Galleries</a>
-              <a class="nav-link hidden-sm-up" href="{% url 'galleries:index' %}"><span aria-hidden="true" class="glyphicon glyphicon-picture"></span></a>
+              <a class="nav-link hidden-xs-down" href="{% url 'galleries:userlist' request.user.username %}">My Galleries</a>
+              <a class="nav-link hidden-sm-up" href="{% url 'galleries:userlist' request.user.username %}"><span aria-hidden="true" class="glyphicon glyphicon-picture"></span></a>
             </li>
             <li class="col-xs-3 col-sm-3 col-smd-12">
               <a class="nav-link hidden-xs-down" href="{% url 'users:friendlist' request.user.username %}">Friends</a>

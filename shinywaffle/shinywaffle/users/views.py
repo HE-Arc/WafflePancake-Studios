@@ -4,6 +4,7 @@ from __future__ import absolute_import, unicode_literals
 from django.core.urlresolvers import reverse
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 from django.conf import settings
+from django.http import HttpResponseRedirect
 
 from django.contrib.auth.models import User
 from friendship.models import Friend, Follow
@@ -84,6 +85,19 @@ def user_addfriend(request, to_username):
         return redirect('users:detail', username=to_username)
 
 @login_required
+def user_addfollow(request, to_username):
+
+    if request.method == 'POST':
+        followee = User.objects.get(username=to_username)
+        follower = request.user
+        try:
+            Follow.objects.add_follower(follower, followee)
+        except AlreadyExistsError as e:
+            messages.add_message(request, messages.ERROR, "%s" % e)
+
+        return redirect('users:detail', username=to_username)
+
+@login_required
 def user_detail(request, username, template_name='users/user_detail.html'):
     model = User
 
@@ -95,6 +109,11 @@ def user_detail(request, username, template_name='users/user_detail.html'):
         get_friendship_context_object_name(): user,
         'friendship_context_object_name': get_friendship_context_object_name()
         })
+
+@login_required
+def search(request):
+    if request.method == 'POST':
+        return user_detail(request, request.POST.get("username"))
 
 
 @login_required
