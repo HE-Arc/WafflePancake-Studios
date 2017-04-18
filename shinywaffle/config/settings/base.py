@@ -272,7 +272,7 @@ ADMIN_URL = r'^admin/'
 
 THUMBNAIL_ALIASES = {
     '': {
-        'gallery-thumb': {'size': (225, 225), 'crop': True},
+        'gallery-thumb': {'size': (250, 250), 'crop': True},
         'gallery-secondary-thumb': {'size': (150, 150), 'crop': True},
         'image-thumb': {'size': (50, 50), 'crop': True},
     },

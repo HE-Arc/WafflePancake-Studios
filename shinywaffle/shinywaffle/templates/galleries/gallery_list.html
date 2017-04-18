@@ -5,28 +5,49 @@
 
 {% block title %}Galleries{% endblock %}
 
+
 {% block content %}
+
   <div class="container">
     <h2>Galleries</h2>
     <div class="list-group">
       {% for gallery in gallery_list %}
-        <div id="{{ gallery.id }}_master" class="list-group-item available">
-          <h4 class="list-group-item-heading">
-            <a href="{% url 'galleries:detail' pk=gallery.id %}">{{ gallery.title }}</a>
-          </h4>
-          {% if gallery.author.id == user.id or user.is_superuser %}
-            <button id="{{ gallery.id }}_delete" class="btn btn-danger delete-button-gallery">
-              <span id="{{ gallery.id }}" aria-hidden="true" class="glyphicon glyphicon-trash delegate"></span>
-            </button>
+        <div id="{{ gallery.id }}_master" class="row list-group-item available">
+          <div class="list-group-item-heading list-heading flex">
+            <span class="list-title"><a href="{% url 'galleries:detail' pk=gallery.id %}">{{ gallery.title }}</a></span>
+            <div class="mid-filler"></div>
+            {% if gallery.author.id == user.id or user.is_superuser %}
+              <button id="{{ gallery.id }}_update" class="btn btn-info pull-right">
+                <span id="{{ gallery.id }}_update-icon" aria-hidden="true" class="glyphicon glyphicon-pencil delegate"></span>
+              </button>
+              <button id="{{ gallery.id }}_delete" class="btn btn-danger delete-button-gallery pull-right">
+                <span id="{{ gallery.id }}_delete-icon" aria-hidden="true" class="glyphicon glyphicon-trash delegate"></span>
+              </button>
+            {% endif %}
+          </div>
+          {% if gallery.image_set.all.first.file %}
+            <a class="col-md-12 gallery-wrapper flex" href="{% url 'galleries:detail' pk=gallery.id %}">
+              <img class="offset-sm-3 offset-md-0 col-md-6 col-lg-3 img-responsive img-circle img-strip-main"
+                   src="{{ gallery.image_set.all.first.file | thumbnail_url:'gallery-thumb' }}"
+                   alt="{{ gallery.image_set.all.first.title }}"/>
+              <div class="hidden-sm-down col-md-6 col-lg-9 gallery-image-strip">
+                {% for i in gallery.image_set.all|slice:"1:3" %}
+                  <img class="col-md-6 col-lg-3 img-responsive img-strip"
+                       src="{{ i.file | thumbnail_url:'gallery-secondary-thumb' }}"
+                       alt="{{ i.title }}"/>
+                {% endfor %}
+                {% for i in gallery.image_set.all|slice:"3:5" %}
+                  <img class="col-lg-3 hidden-md-down img-responsive img-strip"
+                       src="{{ i.file | thumbnail_url:'gallery-secondary-thumb' }}"
+                       alt="{{ i.title }}"/>
+                {% endfor %}
+              </div>
+            </a>
+          {% else %}
+            <a class="col-md-12 gallery-wrapper flex" href="{% url 'galleries:edit' gallery.id %}">
+              <h5 class="text-center">Ooops ! It seems there's no image in here yet. Click to add some.</h5>
+            </a>
           {% endif %}
-          <a href="{% url 'galleries:detail' pk=gallery.id %}">
-            <img src="{{ gallery.image_set.all.first.file | thumbnail_url:'gallery-thumb' }}"
-                 alt="{{ gallery.image_set.all.first.title }}"/>
-            {% for i in gallery.image_set.all|slice:"1:4" %}
-              <img src="{{ i.file | thumbnail_url:'gallery-secondary-thumb' }}"
-                   alt="{{ i.title }}"/>
-            {% endfor %}
-          </a>
         </div>
       {% endfor %}
     </div>
