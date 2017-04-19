@@ -112,11 +112,11 @@ MANAGERS = ADMINS
 DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': os.environ.get('POSTGRES_NAME'),
-    'USER': os.environ.get('POSTGRES_USER', 'root'),
-    'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
+    'NAME': os.environ.get('POSTGRES_NAME', 'shinywaffle'),
+    'USER': os.environ.get('POSTGRES_USER', 'shinywaffle'),
+    'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'shinywaffle'),
     'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
-    'PORT': os.environ.get('POSTGRES_PORT', '3306'),
+    'PORT': os.environ.get('POSTGRES_PORT', '5432'),
 #    'OPTIONS': {
 #      'charset': 'utf8mb4'
 #    }
