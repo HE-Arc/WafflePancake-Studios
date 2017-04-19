@@ -17,12 +17,12 @@
             <a href="{{ image.file.url }}" data-lightbox="{{ gallery.title }}" data-title="{{ image.title }}">
               <img alt="{{ image.title }}" src="{{ image.file | thumbnail_url:'image-detail' }}" width="100%"
                    class="img-responsive img-detail"/>
-              {% if gallery.author.id == user.id or user.is_superuser %}
-                <button id="{{ image.id }}_delete" class="btn btn-danger delete-button-image col-md-12">
-                  <span aria-hidden="true" class="glyphicon glyphicon-trash delegate"></span>
-                </button>
-              {% endif %}
             </a>
+            {% if gallery.author.id == user.id or user.is_superuser %}
+              <button id="{{ image.id }}_delete" class="btn btn-danger delete-button-image col-md-12">
+                <span aria-hidden="true" class="glyphicon glyphicon-trash delegate"></span>
+              </button>
+            {% endif %}
           </div>
         {% endfor %}
       </div>
