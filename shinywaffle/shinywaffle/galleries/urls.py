@@ -12,7 +12,7 @@ urlpatterns = [
         name='userlist'),
     url(regex=r'^new/$', view=views.GalleryNewFormView.as_view(),
         name='new'),
-    url(regex=r'^display/(?P<pk>\d)/$',
+    url(regex=r'^display/(?P<pk>\d+)/$',
         view=views.GalleryDetailView.as_view(),
         name='detail'),
     url(regex=r'^(?P<pk>\d+)/image/new/$',
