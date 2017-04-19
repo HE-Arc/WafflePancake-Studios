@@ -42,11 +42,11 @@
       <div class="collapse navbar-toggleable-xs" id="bs-navbar-collapse-1">
         <ul class="nav navbar-nav pull-xs-right">
           <li class="nav-item">
-              <form method="post" action="{% url 'users:search' %}">
-                  {% csrf_token %}
-                  <input type="text" name="username"/>
-                  <input type="submit" value="search" />
-              </form>
+            <form method="post" action="{% url 'users:search' %}">
+              {% csrf_token %}
+              <input type="text" name="username"/>
+              <input type="submit" value="search"/>
+            </form>
           </li>
           {% if request.user.is_authenticated %}
             <li class="nav-item">
@@ -70,45 +70,54 @@
 </div>
 
 <div class="container">
-    {% if request.user.is_authenticated %}
-  <!-- Fixed navbar -->
-  <div id="main-wrapper" class="row">
+  {% if request.user.is_authenticated %}
+    <!-- Fixed navbar -->
+    <div id="main-wrapper" class="row">
     <div class="container col-md-3 col-xs-12">
       <div class="navbar navbar-default navbar-fixed-side navbar-fixed-side-left" role="navigation">
         <div class="container">
           <ul class="nav navbar-nav">
             <li class="col-xs-3 col-sm-3 col-md-12">
-              <a class="nav-link hidden-xs-down" href="{% url 'home' %}">Favorites</a>
-              <a class="nav-link hidden-sm-up" href="{% url 'home' %}"><span aria-hidden="true" class="glyphicon glyphicon-heart"></span></a>
+              <a class="nav-link hidden-xs-down" href="{% url 'home' %}">Home</a>
+              <a class="nav-link hidden-sm-up" href="{% url 'home' %}"><span aria-hidden="true"
+                                                                             class="glyphicon glyphicon-heart"></span></a>
+              <div class="underline"></div>
             </li>
             <li class="col-xs-3 col-sm-3 col-md-12">
               <a class="nav-link hidden-xs-down" href="{% url 'galleries:index' %}">Explore</a>
-              <a class="nav-link hidden-sm-up" href="{% url 'galleries:index' %}"><span aria-hidden="true" class="glyphicon glyphicon-plane"></span></a>
+              <a class="nav-link hidden-sm-up" href="{% url 'galleries:index' %}"><span aria-hidden="true"
+                                                                                        class="glyphicon glyphicon-plane"></span></a>
+              <div class="underline"></div>
             </li>
             <li class="col-xs-3 col-sm-3 col-md-12">
-              <a class="nav-link hidden-xs-down" href="{% url 'galleries:userlist' request.user.username %}">My Galleries</a>
-              <a class="nav-link hidden-sm-up" href="{% url 'galleries:userlist' request.user.username %}"><span aria-hidden="true" class="glyphicon glyphicon-picture"></span></a>
+              <a class="nav-link hidden-xs-down" href="{% url 'galleries:userlist' request.user.username %}">My
+                Galleries</a>
+              <a class="nav-link hidden-sm-up" href="{% url 'galleries:userlist' request.user.username %}"><span
+                  aria-hidden="true" class="glyphicon glyphicon-picture"></span></a>
+              <div class="underline"></div>
             </li>
             <li class="col-xs-3 col-sm-3 col-md-12">
               <a class="nav-link hidden-xs-down" href="{% url 'users:friendlist' request.user.username %}">Friends</a>
-              <a class="nav-link hidden-sm-up" href="{% url 'users:friendlist' request.user.username %}"><span aria-hidden="true" class="glyphicon glyphicon-user"></span></a>
+              <a class="nav-link hidden-sm-up" href="{% url 'users:friendlist' request.user.username %}"><span
+                  aria-hidden="true" class="glyphicon glyphicon-user"></span></a>
+              <div class="underline"></div>
             </li>
           </ul>
         </div>
       </div>
     </div>
+  {% endif %}
+  <div class="main-content container col-md-9 col-xs-12">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+      {% endfor %}
     {% endif %}
-    <div class="main-content container col-md-9 col-xs-12">
-      {% if messages %}
-        {% for message in messages %}
-          <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
-        {% endfor %}
-      {% endif %}
 
-      {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
-      {% endblock content %}
-    </div>
+    {% block content %}
+      <p>Use this document as a way to quick start any new project.</p>
+    {% endblock content %}
+  </div>
   </div>
 
 
