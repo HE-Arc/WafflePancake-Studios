@@ -9,7 +9,9 @@
     <div class="row">
       <div class="col-sm-12">
         <h2>{{ object.title }}</h2>
-        <a href="{% url 'users:detail' object.author %}">{{ object.author }}</a>
+        <h5>
+          <a href="{% url 'users:detail' object.author %}">{{ object.author }}</a>
+        </h5>
         {% for image in gallery.image_set.all %}
           <div id="{{ image.id }}_master" class="image-detail-wrapper col-md-4">
             <a href="{{ image.file.url }}" data-lightbox="{{ gallery.title }}" data-title="{{ image.title }}">
@@ -25,8 +27,9 @@
         {% endfor %}
       </div>
       <div class="container col-md-12">
-        <a class="gallery-add-button col-md-12 text-center" href="{% url 'galleries:edit' gallery.id %}"><span aria-hidden="true"
-                                                                                         class="glyphicon glyphicon-plus"></span></a>
+        <a class="gallery-add-button col-md-12 text-center" href="{% url 'galleries:edit' gallery.id %}"><span
+            aria-hidden="true"
+            class="glyphicon glyphicon-plus"></span></a>
       </div>
     </div>
   </div>
