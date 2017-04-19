@@ -275,5 +275,6 @@ THUMBNAIL_ALIASES = {
         'gallery-thumb': {'size': (250, 250), 'crop': True},
         'gallery-secondary-thumb': {'size': (150, 150), 'crop': True},
         'image-thumb': {'size': (50, 50), 'crop': True},
+        'image-detail': {'size': (500, 500), 'crop': True}
     },
 }

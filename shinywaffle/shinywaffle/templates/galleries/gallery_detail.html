@@ -8,25 +8,24 @@
     <div class="row">
       <div class="col-sm-12">
         <h2>{{ object.title }}</h2>
-    <a href="{% url 'users:detail' object.author %}">{{ object.author }}</a>
-        <ul>
-          {% for image in gallery.image_set.all %}
-            <li id="{{ image.id }}_master">
-              <a href="{{ image.file.url }}" data-lightbox="{{ gallery.title }}" data-title="{{ image.title }}">
-                <img alt="{{ image.title }}" src="{{ image.file.url }}" width="100%"/>
-              </a>
+        <a href="{% url 'users:detail' object.author %}">{{ object.author }}</a>
+        {% for image in gallery.image_set.all %}
+          <div id="{{ image.id }}_master" class="image-detail-wrapper col-md-4">
+            <a href="{{ image.file.url }}" data-lightbox="{{ gallery.title }}" data-title="{{ image.title }}">
+              <img alt="{{ image.title }}" src="{{ image.file | thumbnail_url:'image-detail' }}" width="100%"
+                   class="img-responsive img-detail"/>
               {% if gallery.author.id == user.id or user.is_superuser %}
-              <button id="{{ image.id }}_delete" class="btn btn-danger delete-button-image">
-                <span aria-hidden="true" class="glyphicon glyphicon-trash delegate"></span>
-              </button>
+                <button id="{{ image.id }}_delete" class="btn btn-danger delete-button-image col-md-12">
+                  <span aria-hidden="true" class="glyphicon glyphicon-trash delegate"></span>
+                </button>
               {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
+            </a>
+          </div>
+        {% endfor %}
       </div>
-      <div class="container">
-        <a class="gallery-add-button" href="{% url 'galleries:edit' gallery.id %}"><span aria-hidden="true"
-                                                                              class="glyphicon glyphicon-plus"></span></a>
+      <div class="container col-md-12">
+        <a class="gallery-add-button col-md-12 text-center" href="{% url 'galleries:edit' gallery.id %}"><span aria-hidden="true"
+                                                                                         class="glyphicon glyphicon-plus"></span></a>
       </div>
     </div>
   </div>

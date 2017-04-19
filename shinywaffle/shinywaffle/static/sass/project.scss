@@ -183,12 +183,12 @@ $nav-transition-time: 430ms;
 .gallery-wrapper {
   align-items: center;
   background-color: rgba(100, 100, 100, 0.1);
-  transition: all .2s ease-in-out;
+  transition: all $nav-transition-time ease-in-out;
 }
 .gallery-wrapper:hover {
   padding: 1px;
   opacity: 0.7;
-  transition: all .2s ease-in-out;
+  transition: all $nav-transition-time ease-in-out;
 }
 
 .gallery-image-strip {
@@ -209,6 +209,31 @@ $nav-transition-time: 430ms;
 
 a:hover {
   text-decoration: none;
+}
+
+
+.image-detail-wrapper {
+  padding: 5px;
+}
+
+.delete-button-image {
+  border-radius: 0;
+  padding: 1px;
+}
+
+.img-detail {
+  opacity: 1;
+  transition: all $nav-transition-time ease-in-out;
+}
+.img-detail:hover {
+  opacity: 0.8;
+  transition: all $nav-transition-time ease-in-out;
+}
+.gallery-add-button {
+  background-color: whitesmoke;
+}
+.gallery-add-button:hover {
+  background-color: lightgrey;
 }
 
 

@@ -18,10 +18,12 @@
             <div class="mid-filler"></div>
             {% if gallery.author == user or user.is_superuser %}
               <button id="{{ gallery.id }}_update" class="btn btn-info pull-right">
-                <span id="{{ gallery.id }}_update-icon" aria-hidden="true" class="glyphicon glyphicon-pencil delegate"></span>
+                <span id="{{ gallery.id }}_update-icon" aria-hidden="true"
+                      class="glyphicon glyphicon-pencil delegate"></span>
               </button>
               <button id="{{ gallery.id }}_delete" class="btn btn-danger delete-button-gallery pull-right">
-                <span id="{{ gallery.id }}_delete-icon" aria-hidden="true" class="glyphicon glyphicon-trash delegate"></span>
+                <span id="{{ gallery.id }}_delete-icon" aria-hidden="true"
+                      class="glyphicon glyphicon-trash delegate"></span>
               </button>
             {% endif %}
           </div>
@@ -49,12 +51,16 @@
             </a>
           {% endif %}
         </div>
+      {% empty %}
+        <a class="col-md-12 gallery-wrapper flex" href="{% url 'galleries:new' gallery.id %}">
+          <h5 class="text-center">Ooops ! It seems there's no gallery in here yet. Click to add some.</h5>
+        </a>
       {% endfor %}
     </div>
 
-    <div class="container">
-      <a class="gallery-add-button" href="{% url 'galleries:new' %}"><span aria-hidden="true"
-                                                                           class="glyphicon glyphicon-plus"></span></a>
+    <div class="container col-md-12">
+      <a class="gallery-add-button col-md-12 text-center" href="{% url 'galleries:new' %}"><span aria-hidden="true"
+                                                                                                 class="glyphicon glyphicon-plus"></span></a>
     </div>
   </div>
 {% endblock content %}
