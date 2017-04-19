@@ -67,7 +67,7 @@
   <h2>Gallery</h2>
   <form method="post" action="{% url 'galleries:userlist' to_user.username %}">
   {% csrf_token %}
-  <input type="submit" value="Explore Gallery {{ to_user.username }} " />
+  <input class="btn btn-primary" type="submit" value="Explore Gallery {{ to_user.username }} " />
   </form>
 
   <h2>followers</h2>

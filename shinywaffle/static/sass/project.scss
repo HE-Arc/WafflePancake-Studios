@@ -1,0 +1,108 @@
+
+// project specific CSS goes here
+
+////////////////////////////////
+		//Variables//
+////////////////////////////////
+
+// Alert colors
+
+$white: #fff;
+$mint-green: #d6e9c6;
+$black: #000;
+$pink: #f2dede;
+$dark-pink: #eed3d7;
+$red: #b94a48;
+
+////////////////////////////////
+		//Alerts//
+////////////////////////////////
+
+// bootstrap alert CSS, translated to the django-standard levels of
+// debug, info, success, warning, error
+
+.alert-debug {
+  background-color: $white;
+  border-color: $mint-green;
+  color: $black;
+}
+
+.alert-error {
+  background-color: $pink;
+  border-color: $dark-pink;
+  color: $red;
+}
+
+////////////////////////////////
+		//Navbar//
+////////////////////////////////
+
+
+.navbar {
+  border-radius: 0;
+}
+.navbar-fixed-side-left {
+  left: 0;
+}
+.navbar-fixed-side {
+  z-index: 1000;
+  min-height: 5px;
+  min-width: 5px;
+  margin-bottom: 0;
+  border: 0 solid transparent;
+  padding: 0;
+}
+.navbar-fixed-side .nav > li > a {
+  width: 100%;
+}
+.navbar-fixed-side .navbar-nav {
+  margin: 0;
+}
+.navbar-fixed-side .navbar-nav > li {
+  display: inline-block;
+}
+.navbar-fixed-side .navbar-nav > li > a {
+  line-height: 20px;
+}
+.navbar-fixed-side .container {
+  width: 100%;
+  padding: 0;
+}
+
+////////////////////////////////
+		//Content//
+////////////////////////////////
+
+.m-b-1 {
+  margin: 0 !important;
+}
+
+#main-wrapper {
+  padding: 10px 0 10px 0;
+}
+
+.main-content {
+  margin-top: 5px;
+  padding: 5px;
+}
+////////////////////////////////
+		//Django Toolbar//
+////////////////////////////////
+
+// Display django-debug-toolbar.
+// See https://github.com/django-debug-toolbar/django-debug-toolbar/issues/742
+// and https://github.com/pydanny/cookiecutter-django/issues/317
+
+[hidden][style="display: block;"] {
+  display: block !important;
+}
+
+/* Custom tweaks */
+.about-banner {
+    //display: block;
+    //margin-left: auto;
+    //margin-right: auto;
+    height: 300px;
+    //float: left;
+    //margin-right: 15px;
+}

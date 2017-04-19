@@ -42,11 +42,11 @@
       <div class="collapse navbar-toggleable-xs" id="bs-navbar-collapse-1">
         <ul class="nav navbar-nav pull-xs-right">
           <li class="nav-item">
-            <form method="post" action="{% url 'users:search' %}">
-              {% csrf_token %}
-              <input type="text" name="username"/>
-              <input type="submit" value="search"/>
-            </form>
+              <form method="post" action="{% url 'users:search' %}">
+                  {% csrf_token %}
+                  <input type="text" name="username"/>
+                  <input class="btn btn-primary" type="submit" value="search" />
+              </form>
           </li>
           {% if request.user.is_authenticated %}
             <li class="nav-item">
