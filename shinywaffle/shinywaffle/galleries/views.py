@@ -12,7 +12,7 @@ from .models import Gallery, Image
 from .forms import GalleryForm, ImageForm
 
 from django.shortcuts import render, get_object_or_404, redirect
-
+from django.views.decorators.csrf import csrf_exempt
 
 
 User = get_user_model()
@@ -54,7 +54,6 @@ class GalleryEditFormView(FormView):
 
     def gallery(self):
         return Gallery.objects.get(pk=self.kwargs['pk'])
-
 
 class GalleryNewFormView(FormView):
     form_class = GalleryForm

@@ -17,10 +17,10 @@
             <span class="list-title"><a href="{% url 'galleries:detail' pk=gallery.id %}">{{ gallery.title }}</a></span>
             <div class="mid-filler"></div>
             {% if gallery.author == user or user.is_superuser %}
-              <button id="{{ gallery.id }}_update" class="btn btn-info pull-right">
+              <!-- <button id="{{ gallery.id }}_update" class="btn btn-info pull-right">
                 <span id="{{ gallery.id }}_update-icon" aria-hidden="true"
                       class="glyphicon glyphicon-pencil delegate"></span>
-              </button>
+              </button> -->
               <button id="{{ gallery.id }}_delete" class="btn btn-danger delete-button-gallery pull-right">
                 <span id="{{ gallery.id }}_delete-icon" aria-hidden="true"
                       class="glyphicon glyphicon-trash delegate"></span>
