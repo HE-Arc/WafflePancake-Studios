@@ -32,7 +32,8 @@ import * as del from './delete'
 import lightboxSetup from './lightbox'
 import {setup} from './ajax'
 
-$(() => {
+$(function() {
+    console.log("Bite");
     lightboxSetup();
     setup();
     addEventListeners();
