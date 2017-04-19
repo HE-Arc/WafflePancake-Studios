@@ -3,6 +3,10 @@
 This [Django](https://www.djangoproject.com/) project is meant to create
 an online photo gallery, accessible and updatable by multiple people at once.
 
+# Presentation slides
+
+Our presentation slides can be viewed [here](https://docs.google.com/presentation/d/1IsiYmbJbYmKJiYRWW7-MgvjkK-OR6qQI1rg7Hsb6ftU/edit?usp=sharing)
+
 # Developpment environment setup
 
 ## Windows
