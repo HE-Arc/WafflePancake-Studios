@@ -3,13 +3,15 @@
 {% block content %}
 <div>{{ friendship_request.from_user }} wants to be friends with {{ friendship_request.to_user }}</div>
 
-<form method="post" action="{% url 'users:requestaccept' friendship_request.pk %}">
-{% csrf_token %}
-<input type="submit" value="accept" />
-</form>
+<div class="container row">
+    <form class="form-inline col-md-2" method="post" action="{% url 'users:requestaccept' friendship_request.pk %}">
+        {% csrf_token %}
+        <input class="btn btn-primary form-control" type="submit" value="Accept" />
+    </form>
 
-<form method="post" action="{% url 'users:requestcancel' friendship_request.pk %}">
-{% csrf_token %}
-<input type="submit" value="cancel" />
-</form>
+    <form class="form-inline col-md-2" method="post" action="{% url 'users:requestcancel' friendship_request.pk %}">
+        {% csrf_token %}
+        <input class="btn btn-danger form-control" type="submit" value="Decline" />
+    </form>
+</div>
 {% endblock content %}

@@ -38,14 +38,14 @@
       <h2>add friend</h2>
         {% if errors %}<p>{{ errors|join:", " }}</p>{% endif %}
         <form method="post" action="{% url 'users:addfriend' to_user.username %}">
-        {% csrf_token %}
-        <input type="submit" value="add {{ to_user.username }} as a friend" />
+            {% csrf_token %}
+            <input class="btn btn-primary" type="submit" value="add {{ to_user.username }} as a friend" />
         </form>
     {% else %}
         <h2>remove friend</h2>
         <form method="post" action="{% url 'users:removefriend' to_user.username %}">
-        {% csrf_token %}
-        <input type="submit" value="remove {{ to_user.username }} as a friend" />
+            {% csrf_token %}
+            <input class="btn btn-primary" type="submit" value="remove {{ to_user.username }} as a friend" />
         </form>
     {% endif %}
 
@@ -54,13 +54,13 @@
         {% if errors %}<p>{{ errors|join:", " }}</p>{% endif %}
         <form method="post" action="{% url 'users:addfollow' to_user.username %}">
         {% csrf_token %}
-        <input type="submit" value="start following {{ to_user.username }}" />
+        <input class="btn btn-primary" type="submit" value="start following {{ to_user.username }}" />
         </form>
     {% else %}
         <h2>stop follow</h2>
         <form method="post" action="{% url 'users:removefollow' to_user.username %}">
         {% csrf_token %}
-        <input type="submit" value="stop following {{ to_user.username }} " />
+        <input class="btn btn-primary" type="submit" value="stop following {{ to_user.username }} " />
         </form>
     {% endif %}
   {% endif %}
