@@ -52,7 +52,7 @@
           {% endif %}
         </div>
       {% empty %}
-        <a class="col-md-12 gallery-wrapper flex" href="{% url 'galleries:new' gallery.id %}">
+        <a class="col-md-12 gallery-wrapper flex" href="{% url 'galleries:new' %}">
           <h5 class="text-center">Ooops ! It seems there's no gallery in here yet. Click to add some.</h5>
         </a>
       {% endfor %}
