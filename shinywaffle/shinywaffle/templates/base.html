@@ -46,7 +46,7 @@
               <form method="post" action="{% url 'users:search' %}">
                   {% csrf_token %}
                   <input type="text" name="username"/>
-                  <input class="btn btn-primary" type="submit" value="search" />
+                  <input class="btn btn-primary" type="submit" value="Search" />
               </form>
           </li>
           {% if request.user.is_authenticated %}
