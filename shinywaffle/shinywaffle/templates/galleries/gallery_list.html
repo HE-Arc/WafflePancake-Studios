@@ -27,17 +27,23 @@
               </button>
             {% endif %}
           </div>
+          {# requête SQL n°1 #}
           {% if gallery.image_set.all.first.file %}
             <a class="col-md-12 gallery-wrapper flex" href="{% url 'galleries:detail' pk=gallery.id %}">
               <img class="offset-sm-3 offset-md-0 col-md-6 col-lg-3 img-responsive img-circle img-strip-main"
+                   {# requête SQL n°2 #}
                    src="{{ gallery.image_set.all.first.file | thumbnail_url:'gallery-thumb' }}"
+                   {# requête SQL n°3 #}
                    alt="{{ gallery.image_set.all.first.title }}"/>
               <div class="hidden-sm-down col-md-6 col-lg-9 gallery-image-strip">
+                {# Ces deux requêtes pourraient être mise en une, un round-trip de moins vers la db #}
+                {# SELECT N+1 #}
                 {% for i in gallery.image_set.all|slice:"1:3" %}
                   <img class="col-md-6 col-lg-3 img-responsive img-strip"
                        src="{{ i.file | thumbnail_url:'gallery-secondary-thumb' }}"
                        alt="{{ i.title }}"/>
                 {% endfor %}
+                {# SELECT N+2 #}
                 {% for i in gallery.image_set.all|slice:"3:5" %}
                   <img class="col-lg-3 hidden-md-down img-responsive img-strip"
                        src="{{ i.file | thumbnail_url:'gallery-secondary-thumb' }}"

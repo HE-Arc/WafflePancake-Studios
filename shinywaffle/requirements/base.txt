@@ -4,8 +4,9 @@
 # Verified bug on Python 3.5.1
 wheel==0.29.0
 
-# Bleeding edge Django
-django==1.10.5
+# Bleeding edge Django... not really.
+django<1.11
+psycopg2>=2.7.1
 
 # Configuration
 django-environ==0.4.1
@@ -20,11 +21,11 @@ django-crispy-forms==1.6.1
 django-model-utils==2.6.1
 
 # Images
-Pillow==4.0.0
+Pillow>=4.0.0
 
 # For user registration, either via email or social
 # Well-built with regular release cycles!
-django-allauth==0.30.0
+django-allauth>=0.30.0
 
 # On Windows, you must download/install psycopg2 manually
 # from http://www.lfd.uci.edu/~gohlke/pythonlibs/#psycopg
@@ -40,8 +41,6 @@ pytz==2016.10
 django-redis==4.7.0
 redis>=2.10.5
 
-
-
-
-
 # Your custom requirements go here
+django-friendship>=1.5.0
+easy-thumbnails>=2.4.1
